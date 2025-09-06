@@ -78,7 +78,7 @@ val TextAreaStyle = CssStyle<TextAreaKind> {
             .outline(0.px, LineStyle.Solid, Colors.Transparent) // Disable, we'll use box shadow instead
             .border(0.px, LineStyle.Solid, Colors.Transparent) // Overridden by variants
             .transition(
-                transitions = Transition.group(
+                Transition.group(
                     properties = listOf(Properties.BorderColor, Properties.BoxShadow, Properties.BackgroundColor),
                     duration = InputVars.ColorTransitionDuration.value()
                 )
