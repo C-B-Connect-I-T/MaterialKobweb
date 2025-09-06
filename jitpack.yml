@@ -1,0 +1,6 @@
+jdk:
+  - openjdk11
+install:
+  - echo "Building only the material library"
+  - chmod +x gradlew
+  - ./gradlew :materialdesignsystem:clean :materialdesignsystem:publishToMavenLocal
