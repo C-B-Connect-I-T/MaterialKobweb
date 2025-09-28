@@ -13,10 +13,6 @@ object Identifiers {
         const val Bio = "bio"
     }
 
-    object Home {
-        const val contact = "contact"
-    }
-
     object ContactForm {
         const val inputFirstName = "inputFirstName"
         const val inputLastname = "inputLastname"

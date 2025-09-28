@@ -4,6 +4,9 @@ package com.materialdesignsystem.components.widgets
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import com.materialdesignsystem.components.UniqueIdGenerator
+import com.materialdesignsystem.constants.Constants
+import com.materialdesignsystem.toColorScheme
 import com.varabyte.kobweb.compose.css.BoxShadow
 import com.varabyte.kobweb.compose.css.CSSLengthNumericValue
 import com.varabyte.kobweb.compose.css.CSSLengthOrPercentageNumericValue
@@ -19,15 +22,13 @@ import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.setVariable
 import com.varabyte.kobweb.compose.ui.thenIfNotNull
 import com.varabyte.kobweb.silk.components.forms.ButtonKind
+import com.varabyte.kobweb.silk.components.forms.ButtonSize
 import com.varabyte.kobweb.silk.components.forms.ButtonStyle
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.style.CssStyleVariant
 import com.varabyte.kobweb.silk.style.addVariant
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.shifted
-import com.materialdesignsystem.components.UniqueIdGenerator
-import com.materialdesignsystem.constants.Constants
-import com.materialdesignsystem.toColorScheme
 import org.jetbrains.compose.web.attributes.ButtonType
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.px
@@ -113,9 +114,9 @@ val TextButtonStyle = ButtonStyle.addVariant {
             .setVariable(ButtonVars.BorderRadius, 999.px)
             .setVariable(ButtonVars.BackgroundDefaultColor, Colors.Transparent)
             .setVariable(ButtonVars.Color, colorScheme.onSurface)
-            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.primary.lightened(0.7f))
-            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.primary.lightened(0.7f))
-            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.primary.lightened(0.5f))
+            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.primary.shifted(colorMode.opposite, 0.5f))
+            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.primary.shifted(colorMode.opposite, 0.5f))
+            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.primary.shifted(colorMode.opposite, 0.2f))
     }
 }
 
@@ -127,6 +128,7 @@ fun DsBaseButton(
     borderRadius: DsBorderRadius? = null,
     type: ButtonType = ButtonType.Button,
     enabled: Boolean = true,
+    size: ButtonSize = ButtonSize.MD,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit
 ) {
@@ -142,6 +144,7 @@ fun DsBaseButton(
             },
         variant = variant,
         type = type,
+        size = size,
         enabled = enabled,
         onClick = { onClick() },
         content = content
@@ -156,6 +159,7 @@ fun ElevatedButton(
     variant: CssStyleVariant<ButtonKind> = ElevatedButtonStyle,
     type: ButtonType = ButtonType.Button,
     enabled: Boolean = true,
+    size: ButtonSize = ButtonSize.MD,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit
 ) {
@@ -166,6 +170,7 @@ fun ElevatedButton(
         type = type,
         enabled = enabled,
         borderRadius = borderRadius,
+        size = size,
         onClick = onClick,
         content = content
     )
@@ -177,6 +182,7 @@ fun FilledButton(
     id: String? = null,
     borderRadius: DsBorderRadius? = null,
     variant: CssStyleVariant<ButtonKind> = FilledButtonStyle,
+    size: ButtonSize = ButtonSize.MD,
     type: ButtonType = ButtonType.Button,
     enabled: Boolean = true,
     onClick: () -> Unit,
@@ -188,6 +194,7 @@ fun FilledButton(
         variant = variant,
         type = type,
         enabled = enabled,
+        size = size,
         borderRadius = borderRadius,
         onClick = onClick,
         content = content
@@ -201,6 +208,7 @@ fun DangerFilledButton(
     borderRadius: DsBorderRadius? = null,
     variant: CssStyleVariant<ButtonKind> = FilledButtonStyle,
     type: ButtonType = ButtonType.Button,
+    size: ButtonSize = ButtonSize.MD,
     enabled: Boolean = true,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit
@@ -216,6 +224,7 @@ fun DangerFilledButton(
         variant = variant,
         type = type,
         enabled = enabled,
+        size = size,
         borderRadius = borderRadius,
         onClick = onClick,
         content = content
@@ -229,6 +238,7 @@ fun OutlinedButton(
     borderRadius: DsBorderRadius? = null,
     variant: CssStyleVariant<ButtonKind> = OutlinedButtonStyle,
     type: ButtonType = ButtonType.Button,
+    size: ButtonSize = ButtonSize.MD,
     enabled: Boolean = true,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit
@@ -238,6 +248,7 @@ fun OutlinedButton(
         id = id,
         variant = variant,
         type = type,
+        size = size,
         enabled = enabled,
         borderRadius = borderRadius,
         onClick = onClick,
@@ -252,6 +263,7 @@ fun FilledTonalButton(
     borderRadius: DsBorderRadius? = null,
     variant: CssStyleVariant<ButtonKind> = FilledTonalButtonStyle,
     type: ButtonType = ButtonType.Button,
+    size: ButtonSize = ButtonSize.MD,
     enabled: Boolean = true,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit
@@ -262,6 +274,7 @@ fun FilledTonalButton(
         variant = variant,
         type = type,
         enabled = enabled,
+        size = size,
         borderRadius = borderRadius,
         onClick = onClick,
         content = content
@@ -275,6 +288,7 @@ fun TextButton(
     borderRadius: DsBorderRadius? = null,
     variant: CssStyleVariant<ButtonKind> = TextButtonStyle,
     type: ButtonType = ButtonType.Button,
+    size: ButtonSize = ButtonSize.MD,
     enabled: Boolean = true,
     onClick: () -> Unit,
     content: @Composable RowScope.() -> Unit
@@ -284,6 +298,7 @@ fun TextButton(
         id = id,
         variant = variant,
         type = type,
+        size = size,
         enabled = enabled,
         borderRadius = borderRadius,
         onClick = onClick,

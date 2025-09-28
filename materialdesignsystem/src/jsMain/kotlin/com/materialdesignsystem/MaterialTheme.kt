@@ -1,9 +1,12 @@
 package com.materialdesignsystem
 
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.materialdesignsystem.extensions.ButtonSizeXL
 import com.materialdesignsystem.theme.ColorScheme
 import com.materialdesignsystem.theme.darkColorScheme
 import com.materialdesignsystem.theme.lightColorScheme
+import com.varabyte.kobweb.silk.init.InitSilk
+import com.varabyte.kobweb.silk.init.InitSilkContext
+import com.varabyte.kobweb.silk.theme.colors.ColorMode
 
 object MaterialTheme {
 
@@ -23,3 +26,8 @@ object MaterialTheme {
 }
 
 val ColorMode.toColorScheme get() = if (isDark) MaterialTheme.dark else MaterialTheme.light
+
+@InitSilk
+fun updateTheme(ctx: InitSilkContext) {
+    ctx.theme.registerStyle("silk-button-size_xl", ButtonSizeXL)
+}

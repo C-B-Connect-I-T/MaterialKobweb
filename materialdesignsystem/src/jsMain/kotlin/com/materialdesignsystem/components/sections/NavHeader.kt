@@ -83,6 +83,7 @@ import org.jetbrains.compose.web.css.vh
 
 @Composable
 fun BaseHeader(
+    modifier: Modifier = Modifier,
     backgroundColor: Color,
     content: @Composable RowScope.() -> Unit
 ) {
@@ -96,7 +97,7 @@ fun BaseHeader(
     }
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(Constants.HEADER_HEIGHT.px)
             .top(0.percent) // Make it work with sticky!
@@ -157,7 +158,6 @@ fun NavigationItem(
             SpanText(
                 modifier = Modifier
                     .id(Identifiers.navigationText)
-                    .fontSize(16.px)
                     .thenIf(selected) {
                         Modifier.color(ColorMode.current.toColorScheme.primary)
                             .fontWeight(FontWeight.Bold)
@@ -170,6 +170,8 @@ fun NavigationItem(
 
 @Composable
 fun OverflowMenu(
+    // TODO: should the logo be added as a parameter? Or maybe have the heading as a composable lambda?
+    logoImage: String,
     onMenuClosed: () -> Unit,
     content: @Composable (closeMenu: () -> Unit) -> Unit
 ) {
@@ -191,10 +193,6 @@ fun OverflowMenu(
         delay(100) // This delay is needed for the translateX
         translateX = 0.percent
         opacity = 100.percent
-
-        if (breakpoint >= Breakpoint.MD) {
-            scope.closeMenu()
-        }
     }
 
     Overlay(
@@ -242,7 +240,7 @@ fun OverflowMenu(
 
                     Image(
                         modifier = Modifier.height(Constants.HEADER_COLLAPSED_LOGO_HEIGHT.px),
-                        src = "/logo.svg",
+                        src = logoImage,
                         alt = "Logo image"
                     )
                 }

@@ -158,7 +158,7 @@ fun DsCreateCard(
 }
 
 @Composable
-fun internalCard(
+private fun internalCard(
     modifier: Modifier = Modifier,
     backgroundColor: Color? = null,
     contentColor: Color? = null,
