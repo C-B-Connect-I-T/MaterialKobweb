@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.materialdesignsystem.toColorScheme
 import com.varabyte.kobweb.compose.css.CSSLengthOrPercentageNumericValue
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.TextAlign
@@ -40,20 +41,24 @@ import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.varabyte.kobweb.silk.style.ComponentKind
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.CssStyleVariant
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.materialdesignsystem.toColorScheme
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.A
 
+sealed interface CardKind : ComponentKind
+
 @Composable
 fun DsCard(
     modifier: Modifier = Modifier,
+    variant: CssStyleVariant<CardKind>? = null,
     backgroundColor: Color? = null,
     contentColor: Color? = null,
     contentPadding: CSSLengthOrPercentageNumericValue = 30.px,
@@ -67,7 +72,7 @@ fun DsCard(
     var checked by remember(selectableMode) { mutableStateOf(false) }
 
     Column(
-        modifier = DsCardStyle.toModifier()
+        modifier = DsCardStyle.toModifier(variant)
             .then(modifier)
             .background(backgroundColor ?: colorScheme.background)
             .color(contentColor ?: colorScheme.onBackground)
@@ -85,9 +90,7 @@ fun DsCard(
                 } else {
                     onClick()
                 }
-            }
-            .transition(Transition.of(TransitionProperty.All, 300.ms))
-            .cursor(Cursor.Pointer),
+            },
         verticalArrangement = Arrangement.spacedBy(16.px),
         content = content
     )
@@ -95,10 +98,21 @@ fun DsCard(
 
 // TODO: use a variant for the `create Card` style to easily switch between them...
 // Had to use the name `DsCardStyle` to avoid conflicts with the Bootstrap `Card` css style...
-val DsCardStyle = CssStyle {
+val DsCardStyle = CssStyle<CardKind> {
+    base {
+        Modifier
+    }
+
+    hover {
+        Modifier
+    }
+}
+
+val DsCardClickableStyle = CssStyle<CardKind> {
     base {
         Modifier
             .scale(100.percent)
+            .cursor(Cursor.Pointer)
             .transition(Transition.of(property = TransitionProperty.All, duration = 100.ms))
     }
 
@@ -160,6 +174,7 @@ fun DsCreateCard(
 @Composable
 private fun internalCard(
     modifier: Modifier = Modifier,
+    variant: CssStyleVariant<CardKind>? = null,
     backgroundColor: Color? = null,
     contentColor: Color? = null,
     text: String,
@@ -168,6 +183,7 @@ private fun internalCard(
     onClick: () -> Unit = {}
 ) = DsCard(
     modifier = modifier,
+    variant = variant,
     backgroundColor = backgroundColor,
     contentColor = contentColor,
     borderLineStyle = LineStyle.Dashed,
