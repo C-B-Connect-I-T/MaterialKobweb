@@ -44,7 +44,10 @@ import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.style.ComponentKind
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.CssStyleVariant
+import com.varabyte.kobweb.silk.style.addVariant
+import com.varabyte.kobweb.silk.style.selectors.disabled
 import com.varabyte.kobweb.silk.style.selectors.hover
+import com.varabyte.kobweb.silk.style.selectors.not
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.LineStyle
@@ -108,7 +111,7 @@ val DsCardStyle = CssStyle<CardKind> {
     }
 }
 
-val DsCardClickableStyle = CssStyle<CardKind> {
+val DsCardClickableStyle = DsCardStyle.addVariant {
     base {
         Modifier
             .scale(100.percent)
@@ -116,7 +119,7 @@ val DsCardClickableStyle = CssStyle<CardKind> {
             .transition(Transition.of(property = TransitionProperty.All, duration = 100.ms))
     }
 
-    hover {
+    (hover + not(disabled)) {
         Modifier
             .boxShadow(
                 offsetY = 0.px,
