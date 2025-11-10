@@ -111,9 +111,9 @@ val IconButtonStyle = ButtonStyle.addVariant {
             .setVariable(ButtonVars.BorderRadius, 999.px)
             .setVariable(ButtonVars.BackgroundDefaultColor, Colors.Transparent)
             .setVariable(ButtonVars.Color, colorScheme.onSurface)
-            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.primary.lightened(0.7f))
-            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.primary.lightened(0.7f))
-            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.primary.lightened(0.5f))
+            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.primary.shifted(colorMode.opposite, 0.5f))
+            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.primary.shifted(colorMode.opposite, 0.5f))
+            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.primary.shifted(colorMode.opposite, 0.2f))
     }
 }
 
