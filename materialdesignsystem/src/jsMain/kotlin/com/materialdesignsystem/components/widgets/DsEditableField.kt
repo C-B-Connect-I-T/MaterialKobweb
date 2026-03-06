@@ -5,6 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.materialdesignsystem.constants.Attributes
+import com.materialdesignsystem.toColorScheme
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -15,7 +17,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.margin
-import com.varabyte.kobweb.compose.ui.modifiers.onFocusOut
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.right
@@ -25,8 +26,6 @@ import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.forms.Input
 import com.varabyte.kobweb.silk.components.forms.InputDefaults
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.materialdesignsystem.constants.Attributes
-import com.materialdesignsystem.toColorScheme
 import org.jetbrains.compose.web.attributes.AutoComplete
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.CSSColorValue
@@ -56,7 +55,6 @@ fun DsEditableField(
     onCommit: () -> Unit = {},
 ) {
     val colorScheme = ColorMode.current.toColorScheme
-    val shouldValidate = remember { mutableStateOf(false) }
     // State for toggling password visibility
     var isPasswordVisible by remember { mutableStateOf(false) }
 
@@ -83,9 +81,6 @@ fun DsEditableField(
                 modifier = Modifier
                     .id(id)
                     .fillMaxWidth()
-                    .onFocusOut {
-                        shouldValidate.value = true
-                    }
                     .padding(
                         left = 0.625.cssRem,
                         right = if (type == InputType.Password) 40.px else 0.px
@@ -101,7 +96,7 @@ fun DsEditableField(
                 onValueChange = onValueChange,
                 required = required,
                 readOnly = readOnly,
-                valid = if (shouldValidate.value) valid else InputDefaults.Valid,
+                valid = valid,
                 placeholder = placeholder,
                 focusBorderColor = focusBorderColor ?: colorScheme.primary.toRgb().copyf(alpha = 0.6f),
                 onCommit = onCommit

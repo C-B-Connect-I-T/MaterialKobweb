@@ -65,13 +65,16 @@ import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.materialdesignsystem.components.widgets.DsMaterialSymbols
 import com.materialdesignsystem.constants.Constants
-import com.materialdesignsystem.constants.Identifiers
 import com.materialdesignsystem.constants.ListenerTypes
 import com.materialdesignsystem.constants.Properties
 import com.materialdesignsystem.toColorScheme
+import com.varabyte.kobweb.compose.ui.attrsModifier
+import com.varabyte.kobweb.silk.style.cssRule
+import com.varabyte.kobweb.silk.style.selectors.children
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.NonCancellable.children
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.web.css.Position
@@ -147,7 +150,7 @@ fun NavigationItem(
             if (icon != null) {
                 DsMaterialSymbols(
                     modifier = Modifier
-                        .id(Identifiers.vectorIcon)
+                        .id(NavHeaderIdentifiers.vectorIcon)
                         .size(24.px)
                         .margin(right = 10.px),
                     icon = icon,
@@ -157,7 +160,7 @@ fun NavigationItem(
 
             SpanText(
                 modifier = Modifier
-                    .id(Identifiers.navigationText)
+                    .id(NavHeaderIdentifiers.navigationText)
                     .thenIf(selected) {
                         Modifier.color(ColorMode.current.toColorScheme.primary)
                             .fontWeight(FontWeight.Bold)
@@ -251,8 +254,13 @@ fun OverflowMenu(
     }
 }
 
+object NavHeaderIdentifiers {
+    const val vectorIcon = "vectorIcon"
+    const val navigationText = "navigationText"
+}
+
 val NavigationItemStyle = CssStyle {
-    cssRule(" > #${Identifiers.vectorIcon}") {
+    cssRule(" > #${NavHeaderIdentifiers.vectorIcon}") {
         Modifier
             .transition(Transition.of(property = TransitionProperty.All, duration = 300.ms))
             .color(colorMode.toColorScheme.onSecondaryContainer)
@@ -261,7 +269,7 @@ val NavigationItemStyle = CssStyle {
             }
     }
 
-    cssRule(":hover > #${Identifiers.vectorIcon}") {
+    cssRule(":hover > #${NavHeaderIdentifiers.vectorIcon}") {
         Modifier
             .color(colorMode.toColorScheme.primary)
             .styleModifier {
@@ -269,13 +277,13 @@ val NavigationItemStyle = CssStyle {
             }
     }
 
-    cssRule(" > #${Identifiers.navigationText}") {
+    cssRule(" > #${NavHeaderIdentifiers.navigationText}") {
         Modifier
             .transition(Transition.of(property = TransitionProperty.All, duration = 300.ms))
             .color(colorMode.toColorScheme.onSecondaryContainer)
     }
 
-    cssRule(":hover > #${Identifiers.navigationText}") {
+    cssRule(":hover > #${NavHeaderIdentifiers.navigationText}") {
         Modifier.color(colorMode.toColorScheme.primary)
             .fontWeight(FontWeight.Bold)
     }

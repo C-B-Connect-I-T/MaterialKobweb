@@ -1,6 +1,9 @@
 package com.materialdesignsystem.components.widgets
 
 import androidx.compose.runtime.Composable
+import com.materialdesignsystem.constants.Attributes
+import com.materialdesignsystem.constants.Properties
+import com.materialdesignsystem.toColorScheme
 import com.varabyte.kobweb.compose.css.Appearance
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -11,7 +14,6 @@ import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
-import com.varabyte.kobweb.compose.ui.modifiers.classNames
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
 import com.varabyte.kobweb.compose.ui.modifiers.fontFamily
@@ -20,18 +22,12 @@ import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.heightIn
 import com.varabyte.kobweb.compose.ui.modifiers.id
 import com.varabyte.kobweb.compose.ui.modifiers.margin
-import com.varabyte.kobweb.compose.ui.modifiers.maxHeight
-import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.minHeight
-import com.varabyte.kobweb.compose.ui.modifiers.minWidth
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.outline
 import com.varabyte.kobweb.compose.ui.modifiers.padding
-import com.varabyte.kobweb.compose.ui.modifiers.paddingInline
 import com.varabyte.kobweb.compose.ui.modifiers.setVariable
 import com.varabyte.kobweb.compose.ui.modifiers.spellCheck
 import com.varabyte.kobweb.compose.ui.modifiers.transition
-import com.varabyte.kobweb.compose.ui.modifiers.width
 import com.varabyte.kobweb.compose.ui.modifiers.widthIn
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.forms.InputSize
@@ -50,11 +46,6 @@ import com.varabyte.kobweb.silk.style.selectors.placeholder
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.style.vars.color.ColorVar
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.materialdesignsystem.constants.Attributes
-import com.materialdesignsystem.constants.ClassNames
-import com.materialdesignsystem.constants.Identifiers
-import com.materialdesignsystem.constants.Properties
-import com.materialdesignsystem.toColorScheme
 import org.jetbrains.compose.web.attributes.placeholder
 import org.jetbrains.compose.web.attributes.required
 import org.jetbrains.compose.web.css.CSSColorValue
