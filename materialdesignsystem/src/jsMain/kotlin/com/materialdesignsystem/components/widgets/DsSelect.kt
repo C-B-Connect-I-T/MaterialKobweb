@@ -2,6 +2,15 @@ package com.materialdesignsystem.components.widgets
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import com.materialdesignsystem.components.UniqueIdGenerator
+import com.materialdesignsystem.styles.bordered
+import com.materialdesignsystem.styles.checkMark
+import com.materialdesignsystem.styles.chevronDownDark
+import com.materialdesignsystem.styles.chevronDownLight
+import com.materialdesignsystem.styles.errorMark
+import com.materialdesignsystem.styles.invalidFeedbackStyle
+import com.materialdesignsystem.styles.validFeedbackStyle
+import com.materialdesignsystem.toColorScheme
 import com.varabyte.kobweb.compose.css.Appearance
 import com.varabyte.kobweb.compose.css.BackgroundPosition
 import com.varabyte.kobweb.compose.css.BackgroundRepeat
@@ -9,8 +18,10 @@ import com.varabyte.kobweb.compose.css.BackgroundSize
 import com.varabyte.kobweb.compose.css.CSSLengthNumericValue
 import com.varabyte.kobweb.compose.css.CSSPosition
 import com.varabyte.kobweb.compose.css.Edge
+import com.varabyte.kobweb.compose.css.OverflowWrap
 import com.varabyte.kobweb.compose.css.PointerEvents
 import com.varabyte.kobweb.compose.css.StyleVariable
+import com.varabyte.kobweb.compose.css.TextOverflow
 import com.varabyte.kobweb.compose.css.TransformOrigin
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.TransitionBehavior
@@ -25,11 +36,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.appearance
 import com.varabyte.kobweb.compose.ui.modifiers.ariaDisabled
 import com.varabyte.kobweb.compose.ui.modifiers.ariaInvalid
 import com.varabyte.kobweb.compose.ui.modifiers.ariaRequired
+import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundImage
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundPosition
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundRepeat
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundSize
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.color
@@ -47,11 +56,13 @@ import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.opacity
 import com.varabyte.kobweb.compose.ui.modifiers.order
 import com.varabyte.kobweb.compose.ui.modifiers.outline
+import com.varabyte.kobweb.compose.ui.modifiers.overflowWrap
 import com.varabyte.kobweb.compose.ui.modifiers.padding
 import com.varabyte.kobweb.compose.ui.modifiers.paddingInline
 import com.varabyte.kobweb.compose.ui.modifiers.pointerEvents
 import com.varabyte.kobweb.compose.ui.modifiers.position
 import com.varabyte.kobweb.compose.ui.modifiers.setVariable
+import com.varabyte.kobweb.compose.ui.modifiers.textOverflow
 import com.varabyte.kobweb.compose.ui.modifiers.top
 import com.varabyte.kobweb.compose.ui.modifiers.transform
 import com.varabyte.kobweb.compose.ui.modifiers.transformOrigin
@@ -62,6 +73,7 @@ import com.varabyte.kobweb.compose.ui.thenIfNotNull
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.ComponentKind
 import com.varabyte.kobweb.silk.style.CssStyle
+import com.varabyte.kobweb.silk.style.CssStyleScope
 import com.varabyte.kobweb.silk.style.CssStyleVariant
 import com.varabyte.kobweb.silk.style.addVariant
 import com.varabyte.kobweb.silk.style.selectors.disabled
@@ -73,14 +85,6 @@ import com.varabyte.kobweb.silk.style.vars.color.BorderColorVar
 import com.varabyte.kobweb.silk.style.vars.size.BorderRadiusVars
 import com.varabyte.kobweb.silk.style.vars.size.FontSizeVars
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.materialdesignsystem.components.UniqueIdGenerator
-import com.materialdesignsystem.styles.bordered
-import com.materialdesignsystem.styles.checkMark
-import com.materialdesignsystem.styles.chevronDown
-import com.materialdesignsystem.styles.errorMark
-import com.materialdesignsystem.styles.invalidFeedbackStyle
-import com.materialdesignsystem.styles.validFeedbackStyle
-import com.materialdesignsystem.toColorScheme
 import org.jetbrains.compose.web.attributes.required
 import org.jetbrains.compose.web.attributes.selected
 import org.jetbrains.compose.web.css.DisplayStyle
@@ -96,6 +100,7 @@ import org.jetbrains.compose.web.css.plus
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.css.s
 import org.jetbrains.compose.web.dom.Div
+import org.jetbrains.compose.web.dom.Img
 import org.jetbrains.compose.web.dom.Label
 import org.jetbrains.compose.web.dom.Option
 import org.jetbrains.compose.web.dom.Select
@@ -147,12 +152,17 @@ val SelectStyle = CssStyle<SelectKind> {
             .display(DisplayStyle.Block)
             .fontSize(SelectVars.FontSize.value())
             .fontWeight(400)
-            .backgroundImage(url(chevronDown))
-            .backgroundRepeat(BackgroundRepeat.NoRepeat)
-            .backgroundPosition(BackgroundPosition.of(CSSPosition(Edge.Right(0.75.cssRem), Edge.CenterY)))
-            .backgroundSize(BackgroundSize.of(16.px, 12.px))
+            .backgroundImage(url(if (colorMode.isDark) chevronDownDark else chevronDownLight))
+            .background {
+                repeat(BackgroundRepeat.NoRepeat)
+                position(BackgroundPosition.of(CSSPosition(Edge.Right(0.75.cssRem), Edge.CenterY)))
+                size(BackgroundSize.of(16.px, 12.px))
+            }
             .outline(0.px, LineStyle.Solid, Colors.Transparent)
             .border(0.px, LineStyle.Solid, Colors.Transparent)
+            .textOverflow(TextOverflow.Ellipsis)
+            .paddingInline(end = 36.px)
+            .overflowWrap(OverflowWrap.BreakWord)
             .transition(Transition.group(properties = listOf("border-color", "box-shadow"), duration = 0.15.s, timingFunction = TransitionTimingFunction.EaseInOut, delay = 0.s, TransitionBehavior.Normal))
     }
 }
@@ -174,7 +184,7 @@ val OutlinedSelectStyle = SelectStyle.addVariant {
     (focus + not(disabled)) { Modifier.bordered(colorMode.toColorScheme.primary) } // TODO: maybe use a variable color here!!
 }
 
-private fun baseValidationStyle(
+private fun CssStyleScope.baseValidationStyle(
     color: Color,
     validationMark: String
 ): Modifier {
@@ -185,7 +195,7 @@ private fun baseValidationStyle(
         .border { color(color) }
         .padding { right(calc { 1.5.em + .75.em }) }
         .styleModifier {
-            backgroundImage("""url("$chevronDown"), url("$validationMark")""".trimIndent())
+            backgroundImage("""url("${if (colorMode.isDark) chevronDownDark else chevronDownLight}"), url("$validationMark")""".trimIndent())
             backgroundPosition("$firstPosition, $secondPosition")
             backgroundSize("16px 12px, ${calc { .75.em + .375.em }} ${calc { .75.em + .375.em }}")
         }
@@ -382,6 +392,9 @@ private fun DsSelectInternal(
                 }
             }
     ) {
+        Img(
+            src = "https://www.dev.klantenstop.be/api/uploads/694045e8-0366-49fe-bf2f-9a728361316d.png"
+        )
         if (!placeholder.isNullOrEmpty()) {
             Option(
                 attrs = Modifier.toAttrs { if (preselectedItem == null) selected() },
