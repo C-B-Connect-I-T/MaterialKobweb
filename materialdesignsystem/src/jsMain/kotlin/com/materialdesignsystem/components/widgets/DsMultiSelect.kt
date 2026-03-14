@@ -6,6 +6,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import com.materialdesignsystem.extensions.maxLines
+import com.materialdesignsystem.styles.bordered
+import com.materialdesignsystem.styles.chevronDownDark
+import com.materialdesignsystem.styles.chevronDownLight
+import com.materialdesignsystem.styles.invalidFeedbackStyle
+import com.materialdesignsystem.styles.validFeedbackStyle
+import com.materialdesignsystem.toColorScheme
 import com.varabyte.kobweb.compose.css.Appearance
 import com.varabyte.kobweb.compose.css.BackgroundPosition
 import com.varabyte.kobweb.compose.css.BackgroundRepeat
@@ -83,12 +90,6 @@ import com.varabyte.kobweb.silk.style.vars.size.FontSizeVars
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.shapes.RectF
 import com.varabyte.kobweb.silk.theme.shapes.clip
-import com.materialdesignsystem.extensions.maxLines
-import com.materialdesignsystem.styles.bordered
-import com.materialdesignsystem.styles.chevronDown
-import com.materialdesignsystem.styles.invalidFeedbackStyle
-import com.materialdesignsystem.styles.validFeedbackStyle
-import com.materialdesignsystem.toColorScheme
 import kotlinx.browser.document
 import org.jetbrains.compose.web.css.AlignContent
 import org.jetbrains.compose.web.css.DisplayStyle
@@ -149,7 +150,7 @@ val MultiSelectStyle = CssStyle<MultiSelectKind> {
             .display(DisplayStyle.Block)
             .fontSize(MultiSelectVars.FontSize.value())
             .fontWeight(400)
-            .backgroundImage(url(chevronDown))
+            .backgroundImage(url(if (colorMode.isDark) chevronDownDark else chevronDownLight))
             .backgroundRepeat(BackgroundRepeat.NoRepeat)
             .backgroundPosition(BackgroundPosition.of(CSSPosition(Edge.Right(0.75.cssRem), Edge.CenterY)))
             .backgroundSize(BackgroundSize.of(16.px, 12.px))
