@@ -29,6 +29,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.setVariable
 import com.varabyte.kobweb.compose.ui.modifiers.spellCheck
 import com.varabyte.kobweb.compose.ui.modifiers.transition
 import com.varabyte.kobweb.compose.ui.modifiers.widthIn
+import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.components.forms.InputSize
 import com.varabyte.kobweb.silk.components.forms.InputVars
@@ -37,6 +38,8 @@ import com.varabyte.kobweb.silk.style.CssPrefix
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.CssStyleVariant
 import com.varabyte.kobweb.silk.style.addVariant
+import com.varabyte.kobweb.compose.ui.modifiers.ariaInvalid
+import com.varabyte.kobweb.silk.components.forms.InputDefaults
 import com.varabyte.kobweb.silk.style.selectors.ariaInvalid
 import com.varabyte.kobweb.silk.style.selectors.disabled
 import com.varabyte.kobweb.silk.style.selectors.focusVisible
@@ -110,6 +113,9 @@ fun DsEditableArea(
     placeholder: String,
     value: String,
     variant: CssStyleVariant<TextAreaKind> = OutlinedTextAreaVariant,
+    required: Boolean = InputDefaults.Required,
+    valid: Boolean = InputDefaults.Valid,
+    invalidBorderColor: CSSColorValue? = null,
     onValueChange: (String) -> Unit
 ) {
     val colorScheme = ColorMode.current.toColorScheme
@@ -137,16 +143,20 @@ fun DsEditableArea(
                     InputVars.BorderFocusColor,
                     colorScheme.primary.toRgb().copyf(alpha = 0.6f)
                 )
-                .setVariable(InputVars.BorderInvalidColor, null)
+                .setVariable(
+                    InputVars.BorderInvalidColor,
+                    invalidBorderColor ?: colorScheme.error
+                )
                 .fillMaxWidth()
                 .height(100.px)
                 .heightIn(50.px, 280.px)
                 .widthIn(100.percent, 100.percent)
                 .backgroundColor(colorScheme.surfaceContainer)
                 .spellCheck(true)
+                .thenIf(!valid) { Modifier.ariaInvalid() }
                 .toAttrs {
                     attr(Attributes.Name, "Message")
-                    required()
+                    if (required) required()
                     placeholder(placeholder)
                     onInput { onValueChange(it.value) }
                 }
