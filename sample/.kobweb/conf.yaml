@@ -1,0 +1,15 @@
+site:
+  title: "Material Design System Sample"
+
+server:
+  files:
+    dev:
+      contentRoot: "build/processedResources/js/main/public"
+      script: "build/kotlin-webpack/js/developmentExecutable/com-materialdesignsystem-sample.js"
+    #      api: "build/libs/com-materialdesignsystem-sample.jar"
+    prod:
+      script: "build/kotlin-webpack/js/productionExecutable/com-materialdesignsystem-sample.js"
+      siteRoot: ".kobweb/site"
+
+  port: 8088
+
