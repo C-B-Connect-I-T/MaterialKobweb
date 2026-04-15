@@ -7,31 +7,31 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import com.materialdesignsystem.components.widgets.DsMaterialSymbols
+import com.materialdesignsystem.constants.Constants
+import com.materialdesignsystem.constants.ListenerTypes
+import com.materialdesignsystem.constants.Properties
+import com.materialdesignsystem.toColorScheme
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.Overflow
 import com.varabyte.kobweb.compose.css.ScrollBehavior
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.css.TransitionProperty
-import com.varabyte.kobweb.compose.css.functions.LinearGradient
 import com.varabyte.kobweb.compose.css.functions.blur
-import com.varabyte.kobweb.compose.css.functions.linearGradient
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.foundation.layout.RowScope
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
-import com.varabyte.kobweb.compose.ui.graphics.Color
 import com.varabyte.kobweb.compose.ui.modifiers.backdropFilter
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundImage
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.cursor
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxHeight
 import com.varabyte.kobweb.compose.ui.modifiers.fillMaxWidth
-import com.varabyte.kobweb.compose.ui.modifiers.fontSize
 import com.varabyte.kobweb.compose.ui.modifiers.fontWeight
 import com.varabyte.kobweb.compose.ui.modifiers.height
 import com.varabyte.kobweb.compose.ui.modifiers.id
@@ -63,18 +63,9 @@ import com.varabyte.kobweb.silk.style.breakpoint.Breakpoint
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.breakpoint.rememberBreakpoint
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.materialdesignsystem.components.widgets.DsMaterialSymbols
-import com.materialdesignsystem.constants.Constants
-import com.materialdesignsystem.constants.ListenerTypes
-import com.materialdesignsystem.constants.Properties
-import com.materialdesignsystem.toColorScheme
-import com.varabyte.kobweb.compose.ui.attrsModifier
-import com.varabyte.kobweb.silk.style.cssRule
-import com.varabyte.kobweb.silk.style.selectors.children
 import kotlinx.browser.document
 import kotlinx.browser.window
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.NonCancellable.children
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.web.css.Position
@@ -87,7 +78,6 @@ import org.jetbrains.compose.web.css.vh
 @Composable
 fun BaseHeader(
     modifier: Modifier = Modifier,
-    backgroundColor: Color,
     content: @Composable RowScope.() -> Unit
 ) {
     var scroll: Double? by remember { mutableStateOf(null) }
@@ -106,13 +96,6 @@ fun BaseHeader(
             .top(0.percent) // Make it work with sticky!
             .position(Position.Sticky)
             .zIndex(1)
-            .backgroundImage(
-                linearGradient(
-                    backgroundColor,
-                    backgroundColor.toRgb().copyf(alpha = 0.5f),
-                    LinearGradient.Direction.ToBottom
-                )
-            )
             .backdropFilter(blur(5.px))
             .thenIf((scroll ?: 0.0) >= 50) {
                 Modifier.boxShadow(0.px, 1.px, 5.px, 0.px, colorMode.toColorScheme.primary)
