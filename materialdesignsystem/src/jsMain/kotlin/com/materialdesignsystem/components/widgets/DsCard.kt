@@ -50,6 +50,7 @@ import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.selectors.not
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.ms
 import org.jetbrains.compose.web.css.percent
@@ -62,8 +63,8 @@ sealed interface CardKind : ComponentKind
 fun DsCard(
     modifier: Modifier = Modifier,
     variant: CssStyleVariant<CardKind>? = null,
-    backgroundColor: Color? = null,
-    contentColor: Color? = null,
+    backgroundColor: CSSColorValue? = null,
+    contentColor: CSSColorValue? = null,
     contentPadding: CSSLengthOrPercentageNumericValue = 30.px,
     selectableMode: Boolean = false,
     borderLineStyle: LineStyle = LineStyle.Solid,
@@ -135,8 +136,8 @@ val DsCardClickableStyle = DsCardStyle.addVariant {
 @Composable
 fun DsCreateCard(
     modifier: Modifier = Modifier,
-    backgroundColor: Color? = null,
-    contentColor: Color? = null,
+    backgroundColor: CSSColorValue? = null,
+    contentColor: CSSColorValue? = null,
     text: String,
     iconSize: CSSLengthOrPercentageNumericValue? = null,
     isColumn: Boolean = true,
@@ -178,8 +179,8 @@ fun DsCreateCard(
 private fun internalCard(
     modifier: Modifier = Modifier,
     variant: CssStyleVariant<CardKind>? = null,
-    backgroundColor: Color? = null,
-    contentColor: Color? = null,
+    backgroundColor: CSSColorValue? = null,
+    contentColor: CSSColorValue? = null,
     text: String,
     iconSize: CSSLengthOrPercentageNumericValue? = null,
     isColumn: Boolean = true,

@@ -8,6 +8,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.styleModifier
 import com.varabyte.kobweb.compose.ui.thenIf
 import com.varabyte.kobweb.compose.ui.toAttrs
+import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.dom.Span
 import org.jetbrains.compose.web.dom.Text
 
@@ -24,7 +25,7 @@ fun DsMaterialSymbols(
     type: MaterialSymbolType = MaterialSymbolType.Outlined,
     weight: Int = 300,
     fill: Boolean = false,
-    color: Color? = null
+    color: CSSColorValue? = null
 ) {
     Span(
         attrs = modifier

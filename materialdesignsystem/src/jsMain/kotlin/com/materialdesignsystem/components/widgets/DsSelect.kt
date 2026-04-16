@@ -87,6 +87,7 @@ import com.varabyte.kobweb.silk.style.vars.size.FontSizeVars
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.attributes.required
 import org.jetbrains.compose.web.attributes.selected
+import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.FlexDirection
 import org.jetbrains.compose.web.css.LineStyle
@@ -185,7 +186,7 @@ val OutlinedSelectStyle = SelectStyle.addVariant {
 }
 
 private fun CssStyleScope.baseValidationStyle(
-    color: Color,
+    color: CSSColorValue,
     validationMark: String
 ): Modifier {
     val firstPosition = BackgroundPosition.of(CSSPosition(Edge.Right(0.75.cssRem), Edge.CenterY))
