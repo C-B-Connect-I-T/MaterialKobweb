@@ -393,9 +393,6 @@ private fun DsSelectInternal(
                 }
             }
     ) {
-        Img(
-            src = "https://www.dev.klantenstop.be/api/uploads/694045e8-0366-49fe-bf2f-9a728361316d.png"
-        )
         if (!placeholder.isNullOrEmpty()) {
             Option(
                 attrs = Modifier.toAttrs { if (preselectedItem == null) selected() },
