@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.materialdesignsystem.components.widgets.DsCheckboxInput
+import com.materialdesignsystem.components.widgets.DsEditableArea
 import com.materialdesignsystem.components.widgets.DsEditableField
 import com.materialdesignsystem.components.widgets.DsReadOnlyField
 import com.materialdesignsystem.components.widgets.DsSelect
@@ -56,7 +57,17 @@ fun InputsPage() {
                         placeholder = "Enter text...",
                         modifier = Modifier.margin(top = 1.cssRem)
                     )
+
+                    DsEditableArea(
+                        id = "text_area_with_helper",
+                        value = textFieldValue,
+                        onValueChange = { textFieldValue = it },
+                        label = "With Helper Text",
+                        placeholder = "Enter text...",
+                        modifier = Modifier.margin(top = 1.cssRem)
+                    )
                 }
+
             }
 
             // Read-only Fields
