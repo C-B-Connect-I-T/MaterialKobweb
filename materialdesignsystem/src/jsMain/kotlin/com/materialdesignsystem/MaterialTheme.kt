@@ -121,19 +121,4 @@ fun updateTheme(ctx: InitSilkContext) {
         darkColorScheme.onBackground,
         darkColorScheme.onBackground
     )
-
-    ctx.theme.palettes.dark.input.set(
-        hoveredBorder = darkColorScheme.primary.toRgb().copyf(0.6f),
-        invalidBorder = darkColorScheme.error.toRgb(),
-        filled = Colors.Red,
-        filledHover = Colors.Green,
-        filledFocus = Colors.Blue
-    )
-    ctx.theme.palettes.light.input.set(
-        hoveredBorder = lightColorScheme.primary.toRgb().copyf(0.6f),
-        invalidBorder = lightColorScheme.error.toRgb(),
-        filled = Colors.Red,
-        filledHover = Colors.Green,
-        filledFocus = Colors.Blue
-    )
 }

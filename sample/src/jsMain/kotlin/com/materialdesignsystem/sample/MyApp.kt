@@ -15,7 +15,7 @@ import org.jetbrains.compose.web.css.vh
 @InitSilk
 fun initSilk(ctx: InitSilkContext) {
     // Initialize Material Theme
-    MaterialTheme.setSchemes()
+    MaterialTheme.setSchemes(lightScheme = KsLightColorScheme, darkScheme = KsDarkColorScheme)
 }
 
 @App
