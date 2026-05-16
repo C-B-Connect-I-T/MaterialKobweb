@@ -25,6 +25,9 @@ import com.varabyte.kobweb.silk.components.forms.ButtonSize
 import com.varabyte.kobweb.silk.components.forms.ButtonVars
 import com.varabyte.kobweb.silk.components.forms.Input
 import com.varabyte.kobweb.silk.components.forms.InputDefaults
+import com.varabyte.kobweb.silk.components.forms.InputKind
+import com.varabyte.kobweb.silk.components.forms.InputVars
+import com.varabyte.kobweb.silk.style.CssStyleVariant
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.attributes.AutoComplete
 import org.jetbrains.compose.web.attributes.InputType
@@ -48,6 +51,7 @@ fun DsEditableField(
     readOnly: Boolean = InputDefaults.ReadOnly,
     required: Boolean = InputDefaults.Required,
     valid: Boolean = InputDefaults.Valid,
+    variant: CssStyleVariant<InputKind>? = InputDefaults.Variant,
     backgroundColor: CSSColorValue? = null,
     focusBorderColor: CSSColorValue? = null,
     autoComplete: AutoComplete? = null,
@@ -85,7 +89,7 @@ fun DsEditableField(
                         left = 0.625.cssRem,
                         right = if (type == InputType.Password) 40.px else 0.px
                     )
-                    .backgroundColor(backgroundColor ?: colorScheme.surfaceContainer)
+                    .backgroundColor(backgroundColor ?: InputVars.FilledColor.value())
                     .color(colorScheme.onSurface)
                     .attrsModifier {
                         attr(Attributes.Name, label)
@@ -99,7 +103,8 @@ fun DsEditableField(
                 valid = valid,
                 placeholder = placeholder,
                 focusBorderColor = focusBorderColor ?: colorScheme.primary.toRgb().copyf(alpha = 0.6f),
-                onCommit = onCommit
+                onCommit = onCommit,
+                variant = variant
             )
 
             if (type == InputType.Password && !readOnly) {

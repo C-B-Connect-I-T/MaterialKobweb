@@ -14,6 +14,7 @@ import com.materialdesignsystem.sample.components.layouts.PageLayout
 import com.materialdesignsystem.toColorScheme
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.foundation.layout.Column
+import com.varabyte.kobweb.compose.foundation.layout.Row
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.color
 import com.varabyte.kobweb.compose.ui.modifiers.fontSize
@@ -22,6 +23,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.gap
 import com.varabyte.kobweb.compose.ui.modifiers.margin
 import com.varabyte.kobweb.compose.ui.modifiers.maxWidth
 import com.varabyte.kobweb.core.Page
+import com.varabyte.kobweb.silk.components.forms.FilledInputVariant
 import com.varabyte.kobweb.silk.components.text.SpanText
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.cssRem
@@ -40,34 +42,67 @@ fun InputsPage() {
         Column(modifier = Modifier.gap(3.cssRem)) {
             // Text Fields
             ComponentSection(title = "Editable Fields") {
-                Column(modifier = Modifier.gap(1.cssRem).maxWidth(400.px)) {
-                    DsEditableField(
-                        id = "text_field",
-                        value = textFieldValue,
-                        onValueChange = { textFieldValue = it },
-                        label = "Text Field",
-                        placeholder = "Enter text..."
-                    )
+                Row {
+                    Column(modifier = Modifier.gap(1.cssRem).maxWidth(400.px)) {
+                        DsEditableField(
+                            id = "text_field",
+                            value = textFieldValue,
+                            onValueChange = { textFieldValue = it },
+                            label = "Text Field",
+                            backgroundColor = colorScheme.surfaceContainer,
+                            placeholder = "Enter text..."
+                        )
 
-                    DsEditableField(
-                        id = "text_field_with_helper",
-                        value = textFieldValue,
-                        onValueChange = { textFieldValue = it },
-                        label = "With Helper Text",
-                        placeholder = "Enter text...",
-                        modifier = Modifier.margin(top = 1.cssRem)
-                    )
+                        DsEditableField(
+                            id = "text_field_with_helper",
+                            value = textFieldValue,
+                            onValueChange = { textFieldValue = it },
+                            label = "With Helper Text",
+                            backgroundColor = colorScheme.surfaceContainer,
+                            placeholder = "Enter text...",
+                            modifier = Modifier.margin(top = 1.cssRem)
+                        )
 
-                    DsEditableArea(
-                        id = "text_area_with_helper",
-                        value = textFieldValue,
-                        onValueChange = { textFieldValue = it },
-                        label = "With Helper Text",
-                        placeholder = "Enter text...",
-                        modifier = Modifier.margin(top = 1.cssRem)
-                    )
+                        DsEditableArea(
+                            id = "text_area_with_helper",
+                            value = textFieldValue,
+                            onValueChange = { textFieldValue = it },
+                            label = "With Helper Text",
+                            placeholder = "Enter text...",
+                            modifier = Modifier.margin(top = 1.cssRem)
+                        )
+                    }
+
+                    Column(modifier = Modifier.gap(1.cssRem).maxWidth(400.px)) {
+                        DsEditableField(
+                            id = "text_field",
+                            value = textFieldValue,
+                            onValueChange = { textFieldValue = it },
+                            label = "Text Field",
+                            variant = FilledInputVariant,
+                            placeholder = "Enter text..."
+                        )
+
+                        DsEditableField(
+                            id = "text_field_with_helper",
+                            value = textFieldValue,
+                            onValueChange = { textFieldValue = it },
+                            label = "With Helper Text",
+                            variant = FilledInputVariant,
+                            placeholder = "Enter text...",
+                            modifier = Modifier.margin(top = 1.cssRem)
+                        )
+
+                        DsEditableArea(
+                            id = "text_area_with_helper",
+                            value = textFieldValue,
+                            onValueChange = { textFieldValue = it },
+                            label = "With Helper Text",
+                            placeholder = "Enter text...",
+                            modifier = Modifier.margin(top = 1.cssRem)
+                        )
+                    }
                 }
-
             }
 
             // Read-only Fields

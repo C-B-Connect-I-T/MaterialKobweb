@@ -1,13 +1,15 @@
 package com.materialdesignsystem.sample.components.layouts
 
 import androidx.compose.runtime.*
+import com.materialdesignsystem.components.widgets.DsMaterialSymbols
+import com.materialdesignsystem.components.widgets.IconButton
 import com.materialdesignsystem.toColorScheme
 import com.varabyte.kobweb.compose.css.FontWeight
-import com.varabyte.kobweb.compose.css.TextAlign
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
+import com.varabyte.kobweb.compose.foundation.layout.Spacer
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
@@ -18,6 +20,7 @@ import org.jetbrains.compose.web.css.*
 
 @Composable
 fun PageLayout(title: String, content: @Composable () -> Unit) {
+    var colorMode by ColorMode.currentState
     val colorScheme = ColorMode.current.toColorScheme
     
     Column(
@@ -61,6 +64,20 @@ fun PageLayout(title: String, content: @Composable () -> Unit) {
                 }
                 Link(path = "/components/icons", modifier = Modifier.color(colorScheme.onSurface)) {
                     SpanText("Icons")
+                }
+
+                Spacer() // Push the toggle button to the right
+
+                // Color mode toggle button
+                IconButton(
+                    onClick = {
+                        colorMode = colorMode.opposite
+                    }
+                ) {
+                    DsMaterialSymbols(
+                        icon = if (colorMode.isDark) "light_mode" else "dark_mode",
+                        modifier = Modifier.color(colorScheme.onSurface)
+                    )
                 }
             }
         }

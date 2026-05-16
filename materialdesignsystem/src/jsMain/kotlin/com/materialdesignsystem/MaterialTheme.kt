@@ -16,6 +16,7 @@ import com.varabyte.kobweb.silk.init.registerStyleBase
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.colors.cssClass
 import com.varabyte.kobweb.silk.theme.colors.palette.background
+import com.varabyte.kobweb.silk.theme.colors.palette.border
 import com.varabyte.kobweb.silk.theme.colors.palette.button
 import com.varabyte.kobweb.silk.theme.colors.palette.color
 import com.varabyte.kobweb.silk.theme.colors.palette.input
@@ -98,6 +99,10 @@ fun updateTheme(ctx: InitSilkContext) {
     ctx.theme.palettes.light.color = lightColorScheme.onBackground
     ctx.theme.palettes.dark.color = darkColorScheme.onBackground
 
+    // border
+    ctx.theme.palettes.light.border = lightColorScheme.outline
+    ctx.theme.palettes.dark.border = darkColorScheme.outline
+
     // Button
     ctx.theme.palettes.light.button.set(
         default = lightColorScheme.primary,
@@ -120,5 +125,23 @@ fun updateTheme(ctx: InitSilkContext) {
     ctx.theme.palettes.dark.link.set(
         darkColorScheme.onBackground,
         darkColorScheme.onBackground
+    )
+
+    // Input palette - following Material Design 3 guidelines
+    // Dark mode
+    ctx.theme.palettes.dark.input.set(
+        hoveredBorder = darkColorScheme.outlineVariant,
+        invalidBorder = darkColorScheme.error.toRgb(),
+        filled = darkColorScheme.surfaceContainerHighest.toRgb(),
+        filledHover = darkColorScheme.surfaceContainerHighest.toRgb().lightened(0.04f),
+        filledFocus = darkColorScheme.surfaceContainerHighest.toRgb().lightened(0.08f)
+    )
+    // Light mode
+    ctx.theme.palettes.light.input.set(
+        hoveredBorder = lightColorScheme.outlineVariant,
+        invalidBorder = lightColorScheme.error.toRgb(),
+        filled = lightColorScheme.surfaceContainerHighest.toRgb(),
+        filledHover = lightColorScheme.surfaceContainerHighest.toRgb().darkened(0.04f),
+        filledFocus = lightColorScheme.surfaceContainerHighest.toRgb().darkened(0.08f)
     )
 }
