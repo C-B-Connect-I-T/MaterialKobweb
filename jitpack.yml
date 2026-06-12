@@ -3,4 +3,4 @@ jdk:
 install:
   - echo "Building only the material library"
   - chmod +x gradlew
-  - ./gradlew :materialdesignsystem:clean :materialdesignsystem:publishToMavenLocal
+  - ./gradlew :materialKobweb:clean :materialKobweb:publishToMavenLocal
