@@ -1,8 +1,14 @@
 # General ignores
 .DS_Store
+.obsidian
 build
 out
 kotlin-js-store
+.obsidian
+
+site/.kobweb/*
+!site/.kobweb/conf.yaml
+!site/.kobweb/site
 
 # IntelliJ ignores
 *.iml
@@ -13,14 +19,6 @@ kotlin-js-store
 
 # Gradle ignores
 .gradle
-
-# Kotlin ignores
-.kotlin
-
-
-site/.kobweb/*
-!site/.kobweb/conf.yaml
-!site/.kobweb/site
 
 /firebase-tools-instant-win.exe
 /site/.kobweb/site/

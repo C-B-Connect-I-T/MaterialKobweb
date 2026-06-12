@@ -6,8 +6,8 @@ plugins {
     alias(libs.plugins.kobweb.application)
 }
 
-group = "com.materialdesignsystem.sample"
-version = "1.0-SNAPSHOT"
+group = "com.materialkobweb.sample"
+version = "0.1.0"
 
 kobweb {
     app {
@@ -22,7 +22,7 @@ kotlin {
 
     sourceSets {
         jsMain.dependencies {
-            implementation(project(":materialdesignsystem"))
+            implementation(project(":materialKobweb"))
             implementation(libs.compose.runtime)
             implementation(libs.compose.html.core)
             implementation(libs.kobweb.core)

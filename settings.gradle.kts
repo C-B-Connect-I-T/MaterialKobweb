@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "materialdesignsystem"
+rootProject.name = "MaterialKobweb"
 
-include(":materialdesignsystem")
+include(":materialKobweb")
 include(":sample")

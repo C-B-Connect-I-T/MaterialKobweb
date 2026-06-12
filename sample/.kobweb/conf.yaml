@@ -5,10 +5,10 @@ server:
   files:
     dev:
       contentRoot: "build/processedResources/js/main/public"
-      script: "build/kotlin-webpack/js/developmentExecutable/com-materialdesignsystem-sample.js"
-    #      api: "build/libs/com-materialdesignsystem-sample.jar"
+      script: "build/kotlin-webpack/js/developmentExecutable/com-materialkobweb-sample.js"
+    #      api: "build/libs/com-materialkobweb-sample.jar"
     prod:
-      script: "build/kotlin-webpack/js/productionExecutable/com-materialdesignsystem-sample.js"
+      script: "build/kotlin-webpack/js/productionExecutable/com-materialkobweb-sample.js"
       siteRoot: ".kobweb/site"
 
   port: 8088
