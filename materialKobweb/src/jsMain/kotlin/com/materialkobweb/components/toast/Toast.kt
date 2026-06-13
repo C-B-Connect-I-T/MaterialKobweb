@@ -89,9 +89,6 @@ fun Toast(
     toast: ToastData,
     onDismiss: () -> Unit
 ) {
-    val colorMode = ColorMode.current
-    val colorScheme = colorMode.toColorScheme
-
     var isVisible by remember { mutableStateOf(false) }
     var isExiting by remember { mutableStateOf(false) }
 
