@@ -46,6 +46,10 @@ kotlin {
             implementation(libs.kobweb.silk.icons.fa)
             // implementation(libs.kobwebx.markdown)
         }
+        jsTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
+        }
     }
 }
 
