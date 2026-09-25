@@ -3,14 +3,16 @@ package com.materialkobweb.components.widgets
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import com.materialkobweb.components.UniqueIdGenerator
+import com.materialkobweb.styles.MaterialColorVars
 import com.materialkobweb.styles.bordered
+import com.materialkobweb.styles.borderedVar
 import com.materialkobweb.styles.checkMark
 import com.materialkobweb.styles.chevronDownDark
 import com.materialkobweb.styles.chevronDownLight
 import com.materialkobweb.styles.errorMark
 import com.materialkobweb.styles.invalidFeedbackStyle
 import com.materialkobweb.styles.validFeedbackStyle
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.withAlpha
 import com.varabyte.kobweb.compose.css.Appearance
 import com.varabyte.kobweb.compose.css.BackgroundPosition
 import com.varabyte.kobweb.compose.css.BackgroundRepeat
@@ -84,7 +86,6 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.style.vars.color.BorderColorVar
 import com.varabyte.kobweb.silk.style.vars.size.BorderRadiusVars
 import com.varabyte.kobweb.silk.style.vars.size.FontSizeVars
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.attributes.required
 import org.jetbrains.compose.web.attributes.selected
 import org.jetbrains.compose.web.css.CSSColorValue
@@ -181,7 +182,7 @@ val OutlinedSelectStyle = SelectStyle.addVariant {
     }
 
     (hover + not(disabled)) { Modifier.border { color(InputVars.BorderHoverColor.value()) } }
-    (focus + not(disabled)) { Modifier.bordered(colorMode.toColorScheme.primary) } // TODO: maybe use a variable color here!!
+    (focus + not(disabled)) { Modifier.borderedVar(MaterialColorVars.Primary.value(), MaterialColorVars.Primary.withAlpha(alpha = 0.25f)) }
 }
 
 private fun CssStyleScope.baseValidationStyle(
@@ -213,11 +214,11 @@ val validSelectStyle = CssStyle {
 
 val invalidSelectStyle = CssStyle {
     base {
-        baseValidationStyle(color = colorMode.toColorScheme.error, validationMark = errorMark)
+        baseValidationStyle(color = MaterialColorVars.Error.value(), validationMark = errorMark)
     }
 
     focus {
-        Modifier.bordered(colorMode.toColorScheme.error)
+        Modifier.borderedVar(MaterialColorVars.Error.value(), MaterialColorVars.Error.withAlpha(alpha = 0.25f))
     }
 }
 
@@ -357,15 +358,13 @@ private fun DsSelectInternal(
     invalidText: String? = null,
     onItemSelect: (Int, String?) -> Unit
 ) {
-    val colorScheme = ColorMode.current.toColorScheme
-
     Select(
         attrs = SelectStyle
             .toModifier(variant)
             .fillMaxWidth()
             .id(id)
-            .backgroundColor(colorScheme.surfaceContainer)
-            .color(colorScheme.onSurface)
+            .backgroundColor(MaterialColorVars.SurfaceContainer.value())
+            .color(MaterialColorVars.OnSurface.value())
             .thenIfNotNull(valid) {
                 if (it) {
                     validSelectStyle.toModifier()

@@ -30,7 +30,8 @@ import com.varabyte.kobweb.silk.style.selectors.focus
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.style.vars.animation.TransitionDurationVars
 import com.materialkobweb.components.UniqueIdGenerator
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
+import com.materialkobweb.styles.withAlpha
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.AlignItems
 import org.jetbrains.compose.web.css.DisplayStyle
@@ -50,10 +51,10 @@ val CheckedInputStyle = CssStyle<CheckboxInputKind> {
     base {
         Modifier
             .appearance(Appearance.None)
-            .backgroundColor(colorMode.toColorScheme.surfaceContainer)
+            .backgroundColor(MaterialColorVars.SurfaceContainer.value())
             .size(1.em)
             .borderRadius(.25.em)
-            .border(1.px, LineStyle.Solid, colorMode.toColorScheme.primary.toRgb().copyf(alpha = 0.6f))
+            .border(1.px, LineStyle.Solid, MaterialColorVars.Primary.withAlpha(alpha = 0.6f))
             .transition(
                 Transition.group(
                     listOf("background-color", "border-color"),
@@ -64,14 +65,14 @@ val CheckedInputStyle = CssStyle<CheckboxInputKind> {
 
     checked {
         Modifier
-            .border(1.px, LineStyle.Solid, colorMode.toColorScheme.primary)
-            .backgroundColor(colorMode.toColorScheme.primary)
+            .border(1.px, LineStyle.Solid, MaterialColorVars.Primary.value())
+            .backgroundColor(MaterialColorVars.Primary.value())
             .backgroundImage(url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e"))
     }
 
     focus {
         Modifier
-            .boxShadow(0.px, 0.px, 0.px, 0.25.em, colorMode.toColorScheme.primary.toRgb().copyf(alpha = 0.25f))
+            .boxShadow(0.px, 0.px, 0.px, 0.25.em, MaterialColorVars.Primary.withAlpha(alpha = 0.25f))
     }
 }
 

@@ -11,7 +11,7 @@ import com.materialkobweb.components.widgets.DsMaterialSymbols
 import com.materialkobweb.constants.Constants
 import com.materialkobweb.constants.ListenerTypes
 import com.materialkobweb.constants.Properties
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.Overflow
@@ -98,7 +98,7 @@ fun BaseHeader(
             .zIndex(1)
             .backdropFilter(blur(5.px))
             .thenIf((scroll ?: 0.0) >= 50) {
-                Modifier.boxShadow(0.px, 1.px, 5.px, 0.px, colorMode.toColorScheme.primary)
+                Modifier.boxShadow(0.px, 1.px, 5.px, 0.px, MaterialColorVars.Primary.value())
             },
         verticalAlignment = Alignment.CenterVertically,
         content = content
@@ -137,7 +137,7 @@ fun NavigationItem(
                         .size(24.px)
                         .margin(right = 10.px),
                     icon = icon,
-                    color = if (selected) ColorMode.current.toColorScheme.primary else null
+                    color = if (selected) MaterialColorVars.Primary.value() else null
                 )
             }
 
@@ -145,7 +145,7 @@ fun NavigationItem(
                 modifier = Modifier
                     .id(NavHeaderIdentifiers.navigationText)
                     .thenIf(selected) {
-                        Modifier.color(ColorMode.current.toColorScheme.primary)
+                        Modifier.color(MaterialColorVars.Primary.value())
                             .fontWeight(FontWeight.Bold)
                     },
                 text = title
@@ -204,7 +204,7 @@ fun OverflowMenu(
                     .minWidth(300.px)
                     .overflow(Overflow.Auto)
                     .scrollBehavior(ScrollBehavior.Smooth)
-                    .backgroundColor(ColorMode.current.toColorScheme.background)
+                    .backgroundColor(MaterialColorVars.Background.value())
                     .translateX(tx = translateX)
                     .transition(Transition.of(Properties.Translate, 500.ms))
             ) {
@@ -246,28 +246,28 @@ val NavigationItemStyle = CssStyle {
     cssRule(" > #${NavHeaderIdentifiers.vectorIcon}") {
         Modifier
             .transition(Transition.of(property = TransitionProperty.All, duration = 300.ms))
-            .color(colorMode.toColorScheme.onSecondaryContainer)
+            .color(MaterialColorVars.OnSecondaryContainer.value())
             .styleModifier {
-                property("stroke", colorMode.toColorScheme.onSecondaryContainer)
+                property("stroke", MaterialColorVars.OnSecondaryContainer.value())
             }
     }
 
     cssRule(":hover > #${NavHeaderIdentifiers.vectorIcon}") {
         Modifier
-            .color(colorMode.toColorScheme.primary)
+            .color(MaterialColorVars.Primary.value())
             .styleModifier {
-                property("stroke", colorMode.toColorScheme.primary)
+                property("stroke", MaterialColorVars.Primary.value())
             }
     }
 
     cssRule(" > #${NavHeaderIdentifiers.navigationText}") {
         Modifier
             .transition(Transition.of(property = TransitionProperty.All, duration = 300.ms))
-            .color(colorMode.toColorScheme.onSecondaryContainer)
+            .color(MaterialColorVars.OnSecondaryContainer.value())
     }
 
     cssRule(":hover > #${NavHeaderIdentifiers.navigationText}") {
-        Modifier.color(colorMode.toColorScheme.primary)
+        Modifier.color(MaterialColorVars.Primary.value())
             .fontWeight(FontWeight.Bold)
     }
 }

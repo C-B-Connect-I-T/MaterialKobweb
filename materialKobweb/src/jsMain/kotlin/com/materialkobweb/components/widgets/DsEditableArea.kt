@@ -3,7 +3,8 @@ package com.materialkobweb.components.widgets
 import androidx.compose.runtime.Composable
 import com.materialkobweb.constants.Attributes
 import com.materialkobweb.constants.Properties
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
+import com.materialkobweb.styles.withAlpha
 import com.varabyte.kobweb.compose.css.Appearance
 import com.varabyte.kobweb.compose.css.Transition
 import com.varabyte.kobweb.compose.foundation.layout.Column
@@ -48,7 +49,6 @@ import com.varabyte.kobweb.silk.style.selectors.not
 import com.varabyte.kobweb.silk.style.selectors.placeholder
 import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.style.vars.color.ColorVar
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.attributes.placeholder
 import org.jetbrains.compose.web.attributes.required
 import org.jetbrains.compose.web.css.CSSColorValue
@@ -118,8 +118,6 @@ fun DsEditableArea(
     invalidBorderColor: CSSColorValue? = null,
     onValueChange: (String) -> Unit
 ) {
-    val colorScheme = ColorMode.current.toColorScheme
-
     Column(
         modifier = modifier
     ) {
@@ -141,17 +139,17 @@ fun DsEditableArea(
                 .fontFamily("inherit")
                 .setVariable(
                     InputVars.BorderFocusColor,
-                    colorScheme.primary.toRgb().copyf(alpha = 0.6f)
+                    MaterialColorVars.Primary.withAlpha(alpha = 0.6f)
                 )
                 .setVariable(
                     InputVars.BorderInvalidColor,
-                    invalidBorderColor ?: colorScheme.error
+                    invalidBorderColor ?: MaterialColorVars.Error.value()
                 )
                 .fillMaxWidth()
                 .height(100.px)
                 .heightIn(50.px, 280.px)
                 .widthIn(100.percent, 100.percent)
-                .backgroundColor(colorScheme.surfaceContainer)
+                .backgroundColor(MaterialColorVars.SurfaceContainer.value())
                 .spellCheck(true)
                 .thenIf(!valid) { Modifier.ariaInvalid() }
                 .toAttrs {

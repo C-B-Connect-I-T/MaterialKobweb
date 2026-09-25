@@ -7,12 +7,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.materialkobweb.extensions.maxLines
-import com.materialkobweb.styles.bordered
+import com.materialkobweb.styles.MaterialColorVars
+import com.materialkobweb.styles.borderedVar
 import com.materialkobweb.styles.chevronDownDark
 import com.materialkobweb.styles.chevronDownLight
 import com.materialkobweb.styles.invalidFeedbackStyle
 import com.materialkobweb.styles.validFeedbackStyle
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.withAlpha
 import com.varabyte.kobweb.compose.css.Appearance
 import com.varabyte.kobweb.compose.css.BackgroundPosition
 import com.varabyte.kobweb.compose.css.BackgroundRepeat
@@ -87,7 +88,6 @@ import com.varabyte.kobweb.silk.style.toModifier
 import com.varabyte.kobweb.silk.style.vars.color.BorderColorVar
 import com.varabyte.kobweb.silk.style.vars.size.BorderRadiusVars
 import com.varabyte.kobweb.silk.style.vars.size.FontSizeVars
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import com.varabyte.kobweb.silk.theme.shapes.RectF
 import com.varabyte.kobweb.silk.theme.shapes.clip
 import kotlinx.browser.document
@@ -174,7 +174,7 @@ val OutlinedMultiSelectStyle = MultiSelectStyle.addVariant {
     }
 
     (hover + not(disabled)) { Modifier.border { color(Colors.Gray) } } // TODO: Use a better color here!!
-    (focus + not(disabled)) { Modifier.bordered(colorMode.toColorScheme.primary) } // TODO: maybe use a variable color here!!
+    (focus + not(disabled)) { Modifier.borderedVar(MaterialColorVars.Primary.value(), MaterialColorVars.Primary.withAlpha(alpha = 0.25f)) }
 }
 
 
@@ -195,7 +195,6 @@ fun DsMultiSelect(
     selectedItems: List<String> = emptyList(),
     onItemSelect: (String) -> Unit
 ) {
-    val colorScheme = ColorMode.current.toColorScheme
     var showDropDownMenu by remember { mutableStateOf(false) }
 
     // Handle "click outside"
@@ -251,8 +250,8 @@ fun DsMultiSelect(
                         .fillMaxWidth()
                         .id(id)
                         .tabIndex(0)
-                        .backgroundColor(colorScheme.surfaceContainer)
-                        .color(colorScheme.onSurface)
+                        .backgroundColor(MaterialColorVars.SurfaceContainer.value())
+                        .color(MaterialColorVars.OnSurface.value())
                         .thenIfNotNull(valid) {
                             if (it) {
                                 validSelectStyle.toModifier()
@@ -309,9 +308,9 @@ fun DsMultiSelect(
                     .display(if (showDropDownMenu) DisplayStyle.Flex else DisplayStyle.None)
                     .margin(top = 8.px)
                     .position(Position.Absolute)
-                    .backgroundColor(colorScheme.surfaceVariant)
+                    .backgroundColor(MaterialColorVars.SurfaceVariant.value())
                     .borderRadius(16.px)
-                    .color(colorScheme.onSurfaceVariant)
+                    .color(MaterialColorVars.OnSurfaceVariant.value())
                     .boxShadow(0.px, 8.px, 16.px, 0.px, Colors.Black.copyf(alpha = 0.2f))
                     .zIndex(1)
             ) {

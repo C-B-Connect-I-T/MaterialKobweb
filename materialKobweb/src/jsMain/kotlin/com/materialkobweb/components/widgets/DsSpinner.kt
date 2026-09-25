@@ -18,8 +18,7 @@ import com.varabyte.kobweb.compose.ui.modifiers.size
 import com.varabyte.kobweb.compose.ui.toAttrs
 import com.varabyte.kobweb.silk.style.animation.Keyframes
 import com.varabyte.kobweb.silk.style.animation.toAnimation
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
 import org.jetbrains.compose.web.css.AnimationTimingFunction
 import org.jetbrains.compose.web.css.DisplayStyle
 import org.jetbrains.compose.web.css.LineStyle
@@ -40,12 +39,10 @@ fun DsSpinner(
     modifier: Modifier = Modifier,
     size: SpinnerSize = SpinnerSize.Normal,
 ) {
-    val colorScheme = ColorMode.current.toColorScheme
-
     Div(
         attrs = modifier
             .size(size.size)
-            .border(size.borderWidth, LineStyle.Solid, colorScheme.primary)
+            .border(size.borderWidth, LineStyle.Solid, MaterialColorVars.Primary.value())
             .borderBottom {
                 color(Colors.Transparent)
             }

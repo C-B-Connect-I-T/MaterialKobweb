@@ -5,7 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
+import com.materialkobweb.styles.withAlpha
 import com.varabyte.kobweb.compose.css.CSSLengthOrPercentageNumericValue
 import com.varabyte.kobweb.compose.css.Cursor
 import com.varabyte.kobweb.compose.css.TextAlign
@@ -48,7 +49,6 @@ import com.varabyte.kobweb.silk.style.selectors.disabled
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.selectors.not
 import com.varabyte.kobweb.silk.style.toModifier
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.CSSColorValue
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.ms
@@ -71,20 +71,19 @@ fun DsCard(
     onClick: () -> Unit = {},
     content: @Composable ColumnScope.() -> Unit
 ) {
-    val colorScheme = ColorMode.current.toColorScheme
     var checked by remember(selectableMode) { mutableStateOf(false) }
 
     Column(
         modifier = DsCardStyle.toModifier(variant)
             .then(modifier)
-            .background(backgroundColor ?: colorScheme.background)
-            .color(contentColor ?: colorScheme.onBackground)
+            .background(backgroundColor ?: MaterialColorVars.Background.value())
+            .color(contentColor ?: MaterialColorVars.OnBackground.value())
             .padding(contentPadding)
             .borderRadius(10.px)
             .border(
                 width = if (selectableMode) 2.px else 1.px,
                 style = if (selectableMode) LineStyle.Solid else borderLineStyle,
-                color = if (selectableMode) colorScheme.primary else colorScheme.outline.toRgb().copyf(alpha = 0.5f)
+                color = if (selectableMode) MaterialColorVars.Primary.value() else MaterialColorVars.Outline.withAlpha(alpha = 0.5f)
             )
             .onClick {
                 if (selectableMode) {
@@ -126,7 +125,7 @@ val DsCardClickableStyle = DsCardStyle.addVariant {
                 offsetX = 0.px,
                 blurRadius = 8.px,
                 spreadRadius = 6.px,
-                color = colorMode.toColorScheme.primary.toRgb().copyf(alpha = 0.15f)
+                color = MaterialColorVars.Primary.withAlpha(alpha = 0.15f)
             )
             .scale(102.percent)
     }
@@ -193,8 +192,6 @@ private fun internalCard(
     contentPadding = 12.px,
     onClick = onClick
 ) {
-    val colorScheme = ColorMode.current.toColorScheme
-
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -204,7 +201,7 @@ private fun internalCard(
         DsMaterialSymbols(
             modifier = Modifier.fontSize(iconSize ?: 24.px).margin(bottom = if (isColumn) 6.px else 0.px),
             icon = "add_circle",
-            color = colorScheme.outline
+            color = MaterialColorVars.Outline.value()
         )
 
         SpanText(

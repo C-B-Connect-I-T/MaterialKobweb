@@ -2,7 +2,7 @@ package com.materialkobweb.sample.pages
 
 import androidx.compose.runtime.*
 import com.materialkobweb.sample.components.layouts.PageLayout
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -12,20 +12,17 @@ import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
 
 @Page("/index")
 @Composable
 fun HomePage() {
     PageLayout(title = "Component Gallery") {
-        val colorScheme = ColorMode.current.toColorScheme
-
         SpanText(
             text = "Welcome to the Material Design System Sample",
             modifier = Modifier
                 .fontSize(1.2.cssRem)
-                .color(colorScheme.onSurface)
+                .color(MaterialColorVars.OnSurface.value())
                 .margin(bottom = 2.cssRem)
         )
 
@@ -33,7 +30,7 @@ fun HomePage() {
             text = "Explore the component categories:",
             modifier = Modifier
                 .fontSize(1.cssRem)
-                .color(colorScheme.onSurfaceVariant)
+                .color(MaterialColorVars.OnSurfaceVariant.value())
                 .margin(bottom = 1.cssRem)
         )
 
@@ -41,43 +38,37 @@ fun HomePage() {
             ComponentCard(
                 title = "Buttons",
                 description = "Explore various button styles including filled, outlined, text, and icon buttons.",
-                path = "/components/buttons",
-                colorScheme = colorScheme
+                path = "/components/buttons"
             )
 
             ComponentCard(
                 title = "Button Links",
                 description = "Navigate using button-styled links for seamless routing within your application.",
-                path = "/components/button-links",
-                colorScheme = colorScheme
+                path = "/components/button-links"
             )
 
             ComponentCard(
                 title = "Cards",
                 description = "Card components for displaying grouped content.",
-                path = "/components/cards",
-                colorScheme = colorScheme
+                path = "/components/cards"
             )
 
             ComponentCard(
                 title = "Inputs",
                 description = "Text fields, selects, checkboxes, and other input components.",
-                path = "/components/inputs",
-                colorScheme = colorScheme
+                path = "/components/inputs"
             )
 
             ComponentCard(
                 title = "Icons",
                 description = "Material symbols and icon buttons.",
-                path = "/components/icons",
-                colorScheme = colorScheme
+                path = "/components/icons"
             )
 
             ComponentCard(
                 title = "Toasts",
                 description = "Display brief messages to the user with our customizable toast notifications.",
-                path = "/components/toasts",
-                colorScheme = colorScheme
+                path = "/components/toasts"
             )
         }
     }
@@ -87,8 +78,7 @@ fun HomePage() {
 private fun ComponentCard(
     title: String,
     description: String,
-    path: String,
-    colorScheme: com.materialkobweb.theme.ColorScheme
+    path: String
 ) {
     Link(
         path = path,
@@ -98,10 +88,10 @@ private fun ComponentCard(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(colorScheme.surfaceContainerLow)
+                .background(MaterialColorVars.SurfaceContainerLow.value())
                 .borderRadius(12.px)
                 .padding(1.5.cssRem)
-                .border(1.px, LineStyle.Solid, colorScheme.outlineVariant)
+                .border(1.px, LineStyle.Solid, MaterialColorVars.OutlineVariant.value())
         ) {
             Column(modifier = Modifier.gap(0.5.cssRem)) {
                 SpanText(
@@ -109,14 +99,14 @@ private fun ComponentCard(
                     modifier = Modifier
                         .fontSize(1.3.cssRem)
                         .fontWeight(FontWeight.Bold)
-                        .color(colorScheme.onSurface)
+                        .color(MaterialColorVars.OnSurface.value())
                 )
 
                 SpanText(
                     text = description,
                     modifier = Modifier
                         .fontSize(1.cssRem)
-                        .color(colorScheme.onSurfaceVariant)
+                        .color(MaterialColorVars.OnSurfaceVariant.value())
                 )
             }
         }

@@ -6,7 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.materialkobweb.constants.Attributes
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
+import com.materialkobweb.styles.withAlpha
 import com.varabyte.kobweb.compose.foundation.layout.Box
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.ui.Modifier
@@ -28,7 +29,6 @@ import com.varabyte.kobweb.silk.components.forms.InputDefaults
 import com.varabyte.kobweb.silk.components.forms.InputKind
 import com.varabyte.kobweb.silk.components.forms.InputVars
 import com.varabyte.kobweb.silk.style.CssStyleVariant
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.attributes.AutoComplete
 import org.jetbrains.compose.web.attributes.InputType
 import org.jetbrains.compose.web.css.CSSColorValue
@@ -58,7 +58,6 @@ fun DsEditableField(
     type: InputType<String> = InputType.Text,
     onCommit: () -> Unit = {},
 ) {
-    val colorScheme = ColorMode.current.toColorScheme
     // State for toggling password visibility
     var isPasswordVisible by remember { mutableStateOf(false) }
 
@@ -90,7 +89,7 @@ fun DsEditableField(
                         right = if (type == InputType.Password) 40.px else 0.px
                     )
                     .backgroundColor(backgroundColor ?: InputVars.FilledColor.value())
-                    .color(colorScheme.onSurface)
+                    .color(MaterialColorVars.OnSurface.value())
                     .attrsModifier {
                         attr(Attributes.Name, label)
                     },
@@ -102,7 +101,7 @@ fun DsEditableField(
                 readOnly = readOnly,
                 valid = valid,
                 placeholder = placeholder,
-                focusBorderColor = focusBorderColor ?: colorScheme.primary.toRgb().copyf(alpha = 0.6f),
+                focusBorderColor = focusBorderColor ?: MaterialColorVars.Primary.withAlpha(alpha = 0.6f),
                 onCommit = onCommit,
                 variant = variant
             )

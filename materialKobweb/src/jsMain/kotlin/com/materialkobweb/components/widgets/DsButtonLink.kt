@@ -28,7 +28,9 @@ package com.materialkobweb.components.widgets
  */
 
 import androidx.compose.runtime.Composable
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
+import com.materialkobweb.styles.lightened
+import com.materialkobweb.styles.shifted
 import com.varabyte.kobweb.compose.css.BoxShadow
 import com.varabyte.kobweb.compose.css.CSSLengthNumericValue
 import com.varabyte.kobweb.compose.css.Cursor
@@ -43,7 +45,6 @@ import com.varabyte.kobweb.compose.foundation.layout.RowScope
 import com.varabyte.kobweb.compose.ui.Alignment
 import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.graphics.Colors
-import com.varabyte.kobweb.compose.ui.graphics.lightened
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
@@ -77,7 +78,6 @@ import com.varabyte.kobweb.silk.style.addVariant
 import com.varabyte.kobweb.silk.style.selectors.focus
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
-import com.varabyte.kobweb.silk.theme.colors.shifted
 import org.jetbrains.compose.web.css.LineStyle
 import org.jetbrains.compose.web.css.cssRem
 import org.jetbrains.compose.web.css.px
@@ -134,19 +134,17 @@ val ButtonLinkStyle = CssStyle<ButtonLinkKind> {
 
 // Elevated variant
 val ElevatedButtonLinkVariant = ButtonLinkStyle.addVariant {
-    val colorScheme = colorMode.toColorScheme
-
     base {
         Modifier
             .borderRadius(ButtonLinkVars.BorderRadius.value())
             .setVariable(ButtonLinkVars.BorderRadius, 999.px)
-            .setVariable(ButtonVars.BackgroundDefaultColor, colorScheme.surfaceContainerLow)
-            .setVariable(ButtonVars.Color, colorScheme.onSurface)
-            .setVariable(LinkVars.DefaultColor, colorScheme.onSurface)
-            .setVariable(LinkVars.VisitedColor, colorScheme.onSurface)
-            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.surfaceContainerLow.shifted(colorMode, 0.1f))
-            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.surfaceContainerLow.shifted(colorMode, 0.1f))
-            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.surfaceContainerLow.shifted(colorMode, 0.3f))
+            .setVariable(ButtonVars.BackgroundDefaultColor, MaterialColorVars.SurfaceContainerLow.value())
+            .setVariable(ButtonVars.Color, MaterialColorVars.OnSurface.value())
+            .setVariable(LinkVars.DefaultColor, MaterialColorVars.OnSurface.value())
+            .setVariable(LinkVars.VisitedColor, MaterialColorVars.OnSurface.value())
+            .setVariable(ButtonVars.BackgroundHoverColor, MaterialColorVars.SurfaceContainerLow.shifted(colorMode, 0.1f))
+            .setVariable(ButtonVars.BackgroundFocusColor, MaterialColorVars.SurfaceContainerLow.shifted(colorMode, 0.1f))
+            .setVariable(ButtonVars.BackgroundPressedColor, MaterialColorVars.SurfaceContainerLow.shifted(colorMode, 0.3f))
             .boxShadow(
                 BoxShadow.of(
                     offsetX = 0.px,
@@ -161,91 +159,81 @@ val ElevatedButtonLinkVariant = ButtonLinkStyle.addVariant {
 
 // Filled variant
 val FilledButtonLinkVariant = ButtonLinkStyle.addVariant {
-    val colorScheme = colorMode.toColorScheme
-
     base {
         Modifier
             .borderRadius(ButtonLinkVars.BorderRadius.value())
             .setVariable(ButtonLinkVars.BorderRadius, 999.px)
-            .setVariable(ButtonVars.BackgroundDefaultColor, colorScheme.primary)
-            .setVariable(ButtonVars.Color, colorScheme.onPrimary)
-            .setVariable(LinkVars.DefaultColor, colorScheme.onPrimary)
-            .setVariable(LinkVars.VisitedColor, colorScheme.onPrimary)
-            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.primary.lightened(0.1f))
-            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.primary.lightened(0.1f))
-            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.primary.lightened(0.3f))
+            .setVariable(ButtonVars.BackgroundDefaultColor, MaterialColorVars.Primary.value())
+            .setVariable(ButtonVars.Color, MaterialColorVars.OnPrimary.value())
+            .setVariable(LinkVars.DefaultColor, MaterialColorVars.OnPrimary.value())
+            .setVariable(LinkVars.VisitedColor, MaterialColorVars.OnPrimary.value())
+            .setVariable(ButtonVars.BackgroundHoverColor, MaterialColorVars.Primary.lightened(0.1f))
+            .setVariable(ButtonVars.BackgroundFocusColor, MaterialColorVars.Primary.lightened(0.1f))
+            .setVariable(ButtonVars.BackgroundPressedColor, MaterialColorVars.Primary.lightened(0.3f))
     }
 }
 
 // Outlined variant
 val OutlinedButtonLinkVariant = ButtonLinkStyle.addVariant {
-    val colorScheme = colorMode.toColorScheme
-
     base {
         Modifier
             .borderRadius(ButtonLinkVars.BorderRadius.value())
             .setVariable(ButtonLinkVars.BorderRadius, 999.px)
             .setVariable(ButtonVars.BackgroundDefaultColor, Colors.Transparent)
-            .setVariable(ButtonVars.Color, colorScheme.primary)
-            .setVariable(LinkVars.DefaultColor, colorScheme.primary)
-            .setVariable(LinkVars.VisitedColor, colorScheme.primary)
-            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.primary.lightened(0.7f))
-            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.primary.lightened(0.7f))
-            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.primary.lightened(0.5f))
-            .border(1.px, LineStyle.Solid, colorScheme.outline)
+            .setVariable(ButtonVars.Color, MaterialColorVars.Primary.value())
+            .setVariable(LinkVars.DefaultColor, MaterialColorVars.Primary.value())
+            .setVariable(LinkVars.VisitedColor, MaterialColorVars.Primary.value())
+            .setVariable(ButtonVars.BackgroundHoverColor, MaterialColorVars.Primary.lightened(0.7f))
+            .setVariable(ButtonVars.BackgroundFocusColor, MaterialColorVars.Primary.lightened(0.7f))
+            .setVariable(ButtonVars.BackgroundPressedColor, MaterialColorVars.Primary.lightened(0.5f))
+            .border(1.px, LineStyle.Solid, MaterialColorVars.Outline.value())
     }
 }
 
 // Filled Tonal variant
 val FilledTonalButtonLinkVariant = ButtonLinkStyle.addVariant {
-    val colorScheme = colorMode.toColorScheme
-
     base {
         Modifier
             .borderRadius(ButtonLinkVars.BorderRadius.value())
             .setVariable(ButtonLinkVars.BorderRadius, 999.px)
-            .setVariable(ButtonVars.BackgroundDefaultColor, colorScheme.secondaryContainer)
-            .setVariable(ButtonVars.Color, colorScheme.onSecondaryContainer)
-            .setVariable(LinkVars.DefaultColor, colorScheme.onSecondaryContainer)
-            .setVariable(LinkVars.VisitedColor, colorScheme.onSecondaryContainer)
-            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.secondaryContainer.shifted(colorMode, 0.1f))
-            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.secondaryContainer.shifted(colorMode, 0.1f))
-            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.secondaryContainer.shifted(colorMode, 0.3f))
+            .setVariable(ButtonVars.BackgroundDefaultColor, MaterialColorVars.SecondaryContainer.value())
+            .setVariable(ButtonVars.Color, MaterialColorVars.OnSecondaryContainer.value())
+            .setVariable(LinkVars.DefaultColor, MaterialColorVars.OnSecondaryContainer.value())
+            .setVariable(LinkVars.VisitedColor, MaterialColorVars.OnSecondaryContainer.value())
+            .setVariable(ButtonVars.BackgroundHoverColor, MaterialColorVars.SecondaryContainer.shifted(colorMode, 0.1f))
+            .setVariable(ButtonVars.BackgroundFocusColor, MaterialColorVars.SecondaryContainer.shifted(colorMode, 0.1f))
+            .setVariable(ButtonVars.BackgroundPressedColor, MaterialColorVars.SecondaryContainer.shifted(colorMode, 0.3f))
     }
 }
 
 // Text variant
 val TextButtonLinkVariant = ButtonLinkStyle.addVariant {
-    val colorScheme = colorMode.toColorScheme
-
     base {
         Modifier
             .borderRadius(ButtonLinkVars.BorderRadius.value())
             .setVariable(ButtonLinkVars.BorderRadius, 999.px)
             .setVariable(ButtonVars.BackgroundDefaultColor, Colors.Transparent)
-            .setVariable(ButtonVars.Color, colorScheme.onSurface)
-            .setVariable(LinkVars.DefaultColor, colorScheme.onSurface)
-            .setVariable(LinkVars.VisitedColor, colorScheme.onSurface)
-            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.primary.shifted(colorMode.opposite, 0.5f))
-            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.primary.shifted(colorMode.opposite, 0.5f))
-            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.primary.shifted(colorMode.opposite, 0.2f))
+            .setVariable(ButtonVars.Color, MaterialColorVars.OnSurface.value())
+            .setVariable(LinkVars.DefaultColor, MaterialColorVars.OnSurface.value())
+            .setVariable(LinkVars.VisitedColor, MaterialColorVars.OnSurface.value())
+            .setVariable(ButtonVars.BackgroundHoverColor, MaterialColorVars.Primary.shifted(colorMode.opposite, 0.5f))
+            .setVariable(ButtonVars.BackgroundFocusColor, MaterialColorVars.Primary.shifted(colorMode.opposite, 0.5f))
+            .setVariable(ButtonVars.BackgroundPressedColor, MaterialColorVars.Primary.shifted(colorMode.opposite, 0.2f))
     }
 }
 
 val PrimaryTextButtonLinkStyle = ButtonLinkStyle.addVariant {
-    val colorScheme = colorMode.toColorScheme
-
     base {
         Modifier
             .borderRadius(ButtonLinkVars.BorderRadius.value())
             .setVariable(ButtonLinkVars.BorderRadius, 999.px)
             .setVariable(ButtonVars.BackgroundDefaultColor, Colors.Transparent)
-            .setVariable(ButtonVars.Color, colorScheme.primary)
-            .setVariable(LinkVars.DefaultColor, colorScheme.primary)
-            .setVariable(LinkVars.VisitedColor, colorScheme.primary)
-            .setVariable(ButtonVars.BackgroundHoverColor, colorScheme.primaryContainer.shifted(colorMode.opposite, 0.5f))
-            .setVariable(ButtonVars.BackgroundFocusColor, colorScheme.primaryContainer.shifted(colorMode.opposite, 0.5f))
-            .setVariable(ButtonVars.BackgroundPressedColor, colorScheme.primaryContainer.shifted(colorMode.opposite, 0.2f))
+            .setVariable(ButtonVars.Color, MaterialColorVars.Primary.value())
+            .setVariable(LinkVars.DefaultColor, MaterialColorVars.Primary.value())
+            .setVariable(LinkVars.VisitedColor, MaterialColorVars.Primary.value())
+            .setVariable(ButtonVars.BackgroundHoverColor, MaterialColorVars.PrimaryContainer.shifted(colorMode.opposite, 0.5f))
+            .setVariable(ButtonVars.BackgroundFocusColor, MaterialColorVars.PrimaryContainer.shifted(colorMode.opposite, 0.5f))
+            .setVariable(ButtonVars.BackgroundPressedColor, MaterialColorVars.PrimaryContainer.shifted(colorMode.opposite, 0.2f))
     }
 }
 
