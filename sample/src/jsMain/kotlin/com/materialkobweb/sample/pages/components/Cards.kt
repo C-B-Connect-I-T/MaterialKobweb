@@ -3,7 +3,7 @@ package com.materialkobweb.sample.pages.components
 import androidx.compose.runtime.*
 import com.materialkobweb.components.widgets.DsCard
 import com.materialkobweb.sample.components.layouts.PageLayout
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -11,14 +11,12 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
 
 @Page
 @Composable
 fun CardsPage() {
     PageLayout(title = "Cards") {
-        val colorScheme = ColorMode.current.toColorScheme
         
         Column(modifier = Modifier.gap(3.cssRem)) {
             ComponentSection(title = "Basic Cards") {
@@ -32,13 +30,13 @@ fun CardsPage() {
                                 modifier = Modifier
                                     .fontSize(1.2.cssRem)
                                     .fontWeight(FontWeight.Bold)
-                                    .color(colorScheme.onSurface)
+                                    .color(MaterialColorVars.OnSurface.value())
                             )
                             SpanText(
                                 text = "This is a basic card component with some content inside.",
                                 modifier = Modifier
                                     .fontSize(1.cssRem)
-                                    .color(colorScheme.onSurfaceVariant)
+                                    .color(MaterialColorVars.OnSurfaceVariant.value())
                             )
                         }
                     }
@@ -52,13 +50,13 @@ fun CardsPage() {
                                 modifier = Modifier
                                     .fontSize(1.2.cssRem)
                                     .fontWeight(FontWeight.Bold)
-                                    .color(colorScheme.onSurface)
+                                    .color(MaterialColorVars.OnSurface.value())
                             )
                             SpanText(
                                 text = "Cards are great for grouping related content and actions.",
                                 modifier = Modifier
                                     .fontSize(1.cssRem)
-                                    .color(colorScheme.onSurfaceVariant)
+                                    .color(MaterialColorVars.OnSurfaceVariant.value())
                             )
                         }
                     }
@@ -72,13 +70,13 @@ fun CardsPage() {
                                 modifier = Modifier
                                     .fontSize(1.2.cssRem)
                                     .fontWeight(FontWeight.Bold)
-                                    .color(colorScheme.onSurface)
+                                    .color(MaterialColorVars.OnSurface.value())
                             )
                             SpanText(
                                 text = "You can put any composable content inside a card.",
                                 modifier = Modifier
                                     .fontSize(1.cssRem)
-                                    .color(colorScheme.onSurfaceVariant)
+                                    .color(MaterialColorVars.OnSurfaceVariant.value())
                             )
                         }
                     }
@@ -93,7 +91,6 @@ private fun ComponentSection(
     title: String,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = ColorMode.current.toColorScheme
     
     Column(modifier = Modifier.gap(1.cssRem)) {
         SpanText(
@@ -101,7 +98,7 @@ private fun ComponentSection(
             modifier = Modifier
                 .fontSize(1.5.cssRem)
                 .fontWeight(FontWeight.SemiBold)
-                .color(colorScheme.onSurface)
+                .color(MaterialColorVars.OnSurface.value())
         )
         content()
     }

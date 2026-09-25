@@ -3,7 +3,7 @@ package com.materialkobweb.sample.pages.components
 import androidx.compose.runtime.*
 import com.materialkobweb.components.widgets.*
 import com.materialkobweb.sample.components.layouts.PageLayout
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.foundation.layout.Column
 import com.varabyte.kobweb.compose.foundation.layout.Row
@@ -11,14 +11,12 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.core.Page
 import com.varabyte.kobweb.silk.components.text.SpanText
-import com.varabyte.kobweb.silk.theme.colors.ColorMode
 import org.jetbrains.compose.web.css.*
 
 @Page
 @Composable
 fun IconsPage() {
     PageLayout(title = "Icons") {
-        val colorScheme = ColorMode.current.toColorScheme
         
         Column(modifier = Modifier.gap(3.cssRem)) {
             // Material Symbols
@@ -26,23 +24,23 @@ fun IconsPage() {
                 Row(modifier = Modifier.gap(1.cssRem).flexWrap(FlexWrap.Wrap)) {
                     DsMaterialSymbols(
                         icon = "home",
-                        modifier = Modifier.fontSize(2.cssRem).color(colorScheme.onSurface)
+                        modifier = Modifier.fontSize(2.cssRem).color(MaterialColorVars.OnSurface.value())
                     )
                     DsMaterialSymbols(
                         icon = "search",
-                        modifier = Modifier.fontSize(2.cssRem).color(colorScheme.onSurface)
+                        modifier = Modifier.fontSize(2.cssRem).color(MaterialColorVars.OnSurface.value())
                     )
                     DsMaterialSymbols(
                         icon = "settings",
-                        modifier = Modifier.fontSize(2.cssRem).color(colorScheme.onSurface)
+                        modifier = Modifier.fontSize(2.cssRem).color(MaterialColorVars.OnSurface.value())
                     )
                     DsMaterialSymbols(
                         icon = "favorite",
-                        modifier = Modifier.fontSize(2.cssRem).color(colorScheme.error)
+                        modifier = Modifier.fontSize(2.cssRem).color(MaterialColorVars.Error.value())
                     )
                     DsMaterialSymbols(
                         icon = "star",
-                        modifier = Modifier.fontSize(2.cssRem).color(colorScheme.primary)
+                        modifier = Modifier.fontSize(2.cssRem).color(MaterialColorVars.Primary.value())
                     )
                 }
             }
@@ -154,7 +152,6 @@ private fun ComponentSection(
     title: String,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = ColorMode.current.toColorScheme
     
     Column(modifier = Modifier.gap(1.cssRem)) {
         SpanText(
@@ -162,7 +159,7 @@ private fun ComponentSection(
             modifier = Modifier
                 .fontSize(1.5.cssRem)
                 .fontWeight(FontWeight.SemiBold)
-                .color(colorScheme.onSurface)
+                .color(MaterialColorVars.OnSurface.value())
         )
         content()
     }

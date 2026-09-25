@@ -37,7 +37,22 @@ object MaterialTheme {
     }
 }
 
-val ColorMode.toColorScheme get() = if (isDark) MaterialTheme.dark else MaterialTheme.light
+/**
+ * Resolves a concrete [ColorScheme] (plain Kotlin [com.varabyte.kobweb.compose.ui.graphics.Color] values) for
+ * this [ColorMode].
+ *
+ * This is `internal` on purpose: it bakes a color into a `Modifier` at Compose composition time, based on
+ * whatever [ColorMode.current]/[ColorMode] value is in scope at that moment. On a statically exported page,
+ * that value can briefly be the export-time default before Silk reconciles it with the user's stored
+ * preference - causing a flash of the wrong color.
+ *
+ * [com.materialkobweb.styles.MaterialColorVars] don't have this problem: they're plain CSS custom properties
+ * scoped by the `.silk-light`/`.silk-dark` class, and that class is corrected synchronously (via an inline
+ * script, see `initSilk`) before the page ever paints. Components should theme themselves using
+ * [com.materialkobweb.styles.MaterialColorVars] instead of this property; it should only be used here, to
+ * populate those CSS variables and the Silk [com.varabyte.kobweb.silk.theme.colors.palette.ColorPalette].
+ */
+internal val ColorMode.toColorScheme get() = if (isDark) MaterialTheme.dark else MaterialTheme.light
 
 @InitSilk
 fun updateTheme(ctx: InitSilkContext) {

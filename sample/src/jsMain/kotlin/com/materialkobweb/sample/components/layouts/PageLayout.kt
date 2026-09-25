@@ -3,7 +3,6 @@ package com.materialkobweb.sample.components.layouts
 import androidx.compose.runtime.*
 import com.materialkobweb.components.widgets.DsMaterialSymbols
 import com.materialkobweb.components.widgets.IconButton
-import com.materialkobweb.toColorScheme
 import com.varabyte.kobweb.compose.css.FontWeight
 import com.varabyte.kobweb.compose.css.TextDecorationLine
 import com.varabyte.kobweb.compose.foundation.layout.Box
@@ -25,7 +24,6 @@ import org.jetbrains.compose.web.css.*
 @Composable
 fun PageLayout(title: String, content: @Composable () -> Unit) {
     var colorMode by ColorMode.currentState
-    val colorScheme = ColorMode.current.toColorScheme
     
     Column(
         modifier = Modifier
@@ -53,20 +51,20 @@ fun PageLayout(title: String, content: @Composable () -> Unit) {
                         modifier = Modifier
                             .fontSize(1.5.cssRem)
                             .fontWeight(FontWeight.Bold)
-                            .color(colorScheme.onSurface)
+                            .color(MaterialColorVars.OnSurface.value())
                     )
                 }
                 
-                Link(path = "/components/buttons", modifier = Modifier.color(colorScheme.onSurface)) {
+                Link(path = "/components/buttons", modifier = Modifier.color(MaterialColorVars.OnSurface.value())) {
                     SpanText("Buttons")
                 }
-                Link(path = "/components/cards", modifier = Modifier.color(colorScheme.onSurface)) {
+                Link(path = "/components/cards", modifier = Modifier.color(MaterialColorVars.OnSurface.value())) {
                     SpanText("Cards")
                 }
-                Link(path = "/components/inputs", modifier = Modifier.color(colorScheme.onSurface)) {
+                Link(path = "/components/inputs", modifier = Modifier.color(MaterialColorVars.OnSurface.value())) {
                     SpanText("Inputs")
                 }
-                Link(path = "/components/icons", modifier = Modifier.color(colorScheme.onSurface)) {
+                Link(path = "/components/icons", modifier = Modifier.color(MaterialColorVars.OnSurface.value())) {
                     SpanText("Icons")
                 }
 
@@ -80,7 +78,7 @@ fun PageLayout(title: String, content: @Composable () -> Unit) {
                 ) {
                     DsMaterialSymbols(
                         icon = if (colorMode.isDark) "light_mode" else "dark_mode",
-                        modifier = Modifier.color(colorScheme.onSurface)
+                        modifier = Modifier.color(MaterialColorVars.OnSurface.value())
                     )
                 }
             }
@@ -97,7 +95,7 @@ fun PageLayout(title: String, content: @Composable () -> Unit) {
                 modifier = Modifier
                     .fontSize(2.cssRem)
                     .fontWeight(FontWeight.Bold)
-                    .color(colorScheme.onSurface)
+                    .color(MaterialColorVars.OnSurface.value())
                     .margin(bottom = 2.cssRem)
             )
             

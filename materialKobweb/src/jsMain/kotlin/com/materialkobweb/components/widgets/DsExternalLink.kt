@@ -13,7 +13,7 @@ import com.varabyte.kobweb.navigation.Anchor
 import com.varabyte.kobweb.silk.style.CssStyle
 import com.varabyte.kobweb.silk.style.selectors.hover
 import com.varabyte.kobweb.silk.style.toModifier
-import com.materialkobweb.toColorScheme
+import com.materialkobweb.styles.MaterialColorVars
 import org.jetbrains.compose.web.css.px
 import org.jetbrains.compose.web.dom.Text
 
@@ -42,12 +42,12 @@ fun DsExternalLink(
 val DsExternalLinkStyle = CssStyle {
     base {
         Modifier.textDecorationLine(TextDecorationLine.None)
-            .color(colorMode.toColorScheme.onBackground)
+            .color(MaterialColorVars.OnBackground.value())
     }
 
     hover {
         Modifier
             .textDecorationLine(TextDecorationLine.Underline)
-            .color(colorMode.toColorScheme.primary)
+            .color(MaterialColorVars.Primary.value())
     }
 }

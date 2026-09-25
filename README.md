@@ -122,13 +122,13 @@ This is useful for testing things like static-export color/flicker behavior, sin
 in fullstack/live-reloading mode. Use the [`kobweb` CLI](https://github.com/varabyte/kobweb-cli) from the `sample`
 module (or pass `-p sample` from the repo root):
 
+ 1. Export the site to plain static HTML/CSS/JS (run from the repo root, or omit -p sample if already inside sample/)
 ```bash
-# 1. Export the site to plain static HTML/CSS/JS (run from the repo root, or omit -p sample if already inside sample/)
 kobweb export --layout static -p sample
 ```
 
+ 2. Serve the exported files, also in static layout
 ```bash
-# 2. Serve the exported files, also in static layout
 kobweb run --env prod --layout static -p sample
 ```
 
