@@ -15,7 +15,11 @@ import com.varabyte.kobweb.compose.ui.Modifier
 import com.varabyte.kobweb.compose.ui.modifiers.*
 import com.varabyte.kobweb.silk.components.navigation.Link
 import com.varabyte.kobweb.silk.components.text.SpanText
+import com.materialkobweb.sample.COLOR_MODE_KEY
+import com.materialkobweb.styles.MaterialColorVars
 import com.varabyte.kobweb.silk.theme.colors.ColorMode
+import com.varabyte.kobweb.silk.theme.colors.palette.toPalette
+import com.varabyte.kobweb.silk.theme.colors.saveToLocalStorage
 import org.jetbrains.compose.web.css.*
 
 @Composable
@@ -26,15 +30,15 @@ fun PageLayout(title: String, content: @Composable () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(colorScheme.surface)
+            .background(MaterialColorVars.Surface.value())
     ) {
         // Header
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(colorScheme.surfaceContainer)
+                .background(MaterialColorVars.SurfaceContainer.value())
                 .padding(1.cssRem)
-                .borderBottom(1.px, LineStyle.Solid, colorScheme.outline)
+                .borderBottom(1.px, LineStyle.Solid, MaterialColorVars.Outline.value())
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth().gap(2.cssRem),
@@ -71,7 +75,7 @@ fun PageLayout(title: String, content: @Composable () -> Unit) {
                 // Color mode toggle button
                 IconButton(
                     onClick = {
-                        colorMode = colorMode.opposite
+                        colorMode = colorMode.opposite.also { it.saveToLocalStorage(COLOR_MODE_KEY) }
                     }
                 ) {
                     DsMaterialSymbols(

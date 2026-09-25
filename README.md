@@ -116,6 +116,37 @@ into their own standalone "core" library later. For now they stay here for simpl
 
 Then open the URL printed in the console. Stop the dev server with `./gradlew :sample:kobwebStop`.
 
+### Exporting and running a static version of the sample
+
+This is useful for testing things like static-export color/flicker behavior, since the dev server above always runs
+in fullstack/live-reloading mode. Use the [`kobweb` CLI](https://github.com/varabyte/kobweb-cli) from the `sample`
+module (or pass `-p sample` from the repo root):
+
+```bash
+# 1. Export the site to plain static HTML/CSS/JS (run from the repo root, or omit -p sample if already inside sample/)
+kobweb export --layout static -p sample
+```
+
+```bash
+# 2. Serve the exported files, also in static layout
+kobweb run --env prod --layout static -p sample
+```
+
+Then open the printed URL (`http://localhost:8088` by default). Stop the server the same way as the dev server:
+
+```bash
+kobweb stop -p sample
+```
+
+Notes:
+- If a dev server (`kobwebStart`) is already running for `sample`, stop it first — `kobweb export` refuses to run
+  while a server is active on the same module.
+- The exported files land in `sample/.kobweb/site/` (one `.html` snapshot per `@Page` route, plus the JS bundle and
+  assets) — open them directly or inspect them if you want to check exactly what gets served/pre-rendered.
+- `--layout static` produces a plain static site (no backend/API routes); this is the layout you want when
+  double-checking things like the static-export color flicker fixes described above. The default `fullstack` layout
+  instead bundles a Ktor server and is what production deployments with server routes typically use.
+
 ## Publishing
 
 The library is published via JitPack (see `jitpack.yml`), which runs:

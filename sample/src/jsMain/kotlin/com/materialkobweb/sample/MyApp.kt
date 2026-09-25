@@ -18,7 +18,7 @@ import com.varabyte.kobweb.silk.theme.colors.systemPreference
 import kotlinx.browser.document
 import org.jetbrains.compose.web.css.vh
 
-private const val COLOR_MODE_KEY = "materialKobweb:colorMode"
+internal const val COLOR_MODE_KEY = "materialKobweb:colorMode"
 
 @InitSilk
 fun initSilk(ctx: InitSilkContext) {
