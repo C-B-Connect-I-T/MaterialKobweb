@@ -42,11 +42,9 @@ import com.varabyte.kobweb.compose.ui.modifiers.appearance
 import com.varabyte.kobweb.compose.ui.modifiers.ariaDisabled
 import com.varabyte.kobweb.compose.ui.modifiers.ariaInvalid
 import com.varabyte.kobweb.compose.ui.modifiers.ariaRequired
+import com.varabyte.kobweb.compose.ui.modifiers.background
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundColor
 import com.varabyte.kobweb.compose.ui.modifiers.backgroundImage
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundPosition
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundRepeat
-import com.varabyte.kobweb.compose.ui.modifiers.backgroundSize
 import com.varabyte.kobweb.compose.ui.modifiers.border
 import com.varabyte.kobweb.compose.ui.modifiers.borderRadius
 import com.varabyte.kobweb.compose.ui.modifiers.boxShadow
@@ -151,9 +149,11 @@ val MultiSelectStyle = CssStyle<MultiSelectKind> {
             .fontSize(MultiSelectVars.FontSize.value())
             .fontWeight(400)
             .backgroundImage(url(if (colorMode.isDark) chevronDownDark else chevronDownLight))
-            .backgroundRepeat(BackgroundRepeat.NoRepeat)
-            .backgroundPosition(BackgroundPosition.of(CSSPosition(Edge.Right(0.75.cssRem), Edge.CenterY)))
-            .backgroundSize(BackgroundSize.of(16.px, 12.px))
+            .background {
+                repeat(BackgroundRepeat.NoRepeat)
+                position(BackgroundPosition.of(CSSPosition(Edge.Right(0.75.cssRem), Edge.CenterY)))
+                size(BackgroundSize.of(16.px, 12.px))
+            }
             .outline(0.px, LineStyle.Solid, Colors.Transparent)
             .border(0.px, LineStyle.Solid, Colors.Transparent)
             .transition(Transition.group(properties = listOf("border-color", "box-shadow"), duration = 0.15.s, timingFunction = TransitionTimingFunction.EaseInOut, delay = 0.s, TransitionBehavior.Normal))
